@@ -4,13 +4,11 @@ public abstract class Ativos {
     protected String nome;
     protected String ticker;
     protected double precoAtual;
-    protected boolean qualificado;
 
-    public Ativos(String nome, String ticker, double precoAtual, boolean qualificado){
+    public Ativos(String nome, String ticker, double precoAtual){
         this.nome = nome;
         this.ticker = ticker;
         this.precoAtual = precoAtual;
-        this.qualificado = qualificado;
     }
 
     public String getNome(){
@@ -21,8 +19,5 @@ public abstract class Ativos {
     }
     public double getPrecoAtual(){
         return precoAtual;
-    }
-    public boolean getQualificado(){
-        return qualificado;
     }
 }

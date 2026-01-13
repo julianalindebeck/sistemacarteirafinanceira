@@ -1,7 +1,12 @@
 package ativos;
 
 public class Tesouro extends Ativos{
-    public Tesouro(String nome, String ticker, double precoAtual, boolean qualificado){
-        super(nome, ticker, precoAtual, qualificado);
+    private String rendimento;
+    private String vencimento;
+
+    public Tesouro(String nome, String ticker, double precoAtual, String rendimento, String vencimento){
+        super(nome, ticker, precoAtual);
+        this.rendimento = rendimento;
+         this.vencimento = vencimento;
     }
 }
