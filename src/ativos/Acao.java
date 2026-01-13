@@ -4,9 +4,9 @@ import java.util.Optional;
 
 public class Acao extends Ativos{
     private String tipo;
-    private boolean qualificado;
+    private int qualificado;
 
-    public Acao(String nome, String ticker, double precoAtual, boolean qualificado){
+    public Acao(String nome, String ticker, double precoAtual, int qualificado){
         super(nome, ticker, precoAtual);
         this.qualificado = qualificado;
     }
