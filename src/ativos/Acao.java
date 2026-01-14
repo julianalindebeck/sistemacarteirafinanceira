@@ -1,8 +1,6 @@
 package ativos;
 
-import java.util.Optional;
-
-public class Acao extends Ativos{
+public class Acao extends AtivosNacionais {
     private String tipo;
     private int qualificado;
 
@@ -12,7 +10,8 @@ public class Acao extends Ativos{
     }
 
     public void confereTipo(){
-        int pos = ticker.length()-1;
+        int pos = ticker.length() - 1;
+
         if(ticker.charAt(pos) == '3'){
             this.tipo = "Ordinária";
         }

@@ -1,6 +1,6 @@
 package ativos;
 
-public class Fii extends Ativos{
+public class Fii extends AtivosNacionais {
     private String segmento;
     private double dividendo;
     private double taxaAdm;
@@ -14,5 +14,17 @@ public class Fii extends Ativos{
 
     public void exibirTaxa(){
         System.out.println(taxaAdm + "%");
+    }
+
+    @Override
+    public String toString() {
+        return "Criptoativo | " +
+                "Nome: " + nome  +
+                ", Ticker: " + ticker +
+                ", Preço: " + precoAtual +
+                ", Segmento: " + segmento +
+                ", Dividendo: " + dividendo +
+                ", Taxa: " + taxaAdm +
+                '.';
     }
 }

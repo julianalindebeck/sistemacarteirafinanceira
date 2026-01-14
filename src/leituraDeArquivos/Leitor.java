@@ -20,7 +20,7 @@ public class Leitor {
             br.readLine(); 
 
             while ((linha = br.readLine()) != null){
-                String[] partes = linha.split(",");
+                String[] partes = linha.split(";");
                 linhas.add(partes);
             } 
 
@@ -47,32 +47,23 @@ public class Leitor {
         return lista;
     }
 
-    public static List<Fii> listaFii(){
-        List<Fii> lista = new ArrayList<>();
-
-        for (String[] c : lerCSV("arquivos/fii.csv")){
-            String ticker = c[0];
-            String nome = c[1];
-            String segmento = c[2];
-            double precoaAtual = Double.parseDouble(c[3]);
-            double dividendo = Double.parseDouble(c[4]);
-            double taxaAdm = Double.parseDouble(c[5]);
-
-            lista.add(new Fii(nome, ticker, precoaAtual, segmento, dividendo, taxaAdm));
-        }
-
-        return lista;
-    }
-
     public static List<Criptoativo> listaCriptoativo(){
         List<Criptoativo> lista = new ArrayList<>();
 
-        for (String[] c : lerCSV("arquivos/acao.csv")){
+        for (String[] c : lerCSV("arquivos/criptoativo.csv")){
             String ticker = c[0];
             String nome = c[1];
             double precoaAtual = Double.parseDouble(c[2]);
             String algoritmo = c[3];
-            int qtdMax = Integer.parseInt(c[4]);
+            int qtdMax = 0;
+            
+            try{
+                if(c.length >= 5 && !c[4].isEmpty())
+                    qtdMax = Integer.parseInt(c[4]);
+            }
+            catch(NumberFormatException e){
+                System.out.println("sla");
+            }
 
             lista.add(new Criptoativo(nome, ticker, precoaAtual, algoritmo, qtdMax));
         }
@@ -80,17 +71,26 @@ public class Leitor {
         return lista;
     }
 
-    public static List<Stock> listaStock(){
-        List<Stock> lista = new ArrayList<>();
+    public static List<Fii> listaFii(){
+        List<Fii> lista = new ArrayList<>();
 
-        for (String[] c : lerCSV("arquivos/stock.csv")){
+        for (String[] c : lerCSV("arquivos/fii.csv")){
             String ticker = c[0];
             String nome = c[1];
-            double precoaAtual = Double.parseDouble(c[2]);
-            String bolsa = c[3];
-            String setor = c[4];
+            String segmento = c[2];
+            double precoaAtual;
 
-            lista.add(new Stock(nome, ticker, precoaAtual, bolsa, setor));
+            try{
+                precoaAtual = Double.parseDouble(c[3]);
+            }
+            catch(Exception e){
+                precoaAtual = 0;
+            }
+
+            double dividendo = Double.parseDouble(c[4]);
+            double taxaAdm = Double.parseDouble(c[5]);
+
+            lista.add(new Fii(nome, ticker, precoaAtual, segmento, dividendo, taxaAdm));
         }
 
         return lista;
@@ -108,6 +108,22 @@ public class Leitor {
 
             lista.add(new Tesouro(nome, ticker, precoaAtual, rendimento, vencimento));
         }
+        return lista;
+    }
+
+    public static List<Stock> listaStock(){
+        List<Stock> lista = new ArrayList<>();
+
+        for (String[] c : lerCSV("arquivos/stock.csv")){
+            String ticker = c[0];
+            String nome = c[1];
+            double precoaAtual = Double.parseDouble(c[2]);
+            String bolsa = c[3];
+            String setor = c[4];
+
+            lista.add(new Stock(nome, ticker, precoaAtual, bolsa, setor));
+        }
+
         return lista;
     }
 

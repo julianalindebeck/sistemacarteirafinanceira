@@ -1,6 +1,6 @@
 package ativos;
 
-public class Criptoativo extends AtivosInternacionais{
+public class Criptoativo extends AtivosInternacionais {
     private String algoritmo;
     private int qtdMax;
 
@@ -10,4 +10,14 @@ public class Criptoativo extends AtivosInternacionais{
         this.qtdMax = qtdMax;
     }
 
+    @Override
+    public String toString() {
+        return "Criptoativo | " +
+                "Nome: " + nome  +
+                ", Ticker: " + ticker +
+                ", Preço: " + precoAtual +
+                ", Algoritmo: " + algoritmo +
+                ", Quantidade Máxima: " + qtdMax +
+                '.';
+    }
 }

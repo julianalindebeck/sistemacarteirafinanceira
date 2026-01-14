@@ -1,6 +1,6 @@
 package ativos;
 
-public class Stock extends AtivosInternacionais{
+public class Stock extends AtivosInternacionais {
     private String bolsa;
     private String setor;
 

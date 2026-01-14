@@ -14,9 +14,11 @@ public abstract class Ativos {
     public String getNome(){
         return nome;
     }
+
     public String getTicker(){
         return ticker;
     }
+    
     public double getPrecoAtual(){
         return precoAtual;
     }
