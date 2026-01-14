@@ -63,7 +63,7 @@ public class App {
             //cadastrarAtivoLote();
         }
         else if(escolha.equals("3")){
-            //editarAtivo();
+            editarAtivo();
         }
         else if(escolha.equals("4")){
             //exlcuirAtivo();
@@ -104,6 +104,28 @@ public class App {
         }
     }
 
+    public static void editarAtivo(){
+        do{
+            System.out.println("Escolha:\n1.Ação\n2.Criptoativos\n3.FII\n4.Stock\n5.Tesouro");
+            escolha = leitura.nextLine();
+        }while(!escolha.equals("1") && !escolha.equals("2") && !escolha.equals("3") && !escolha.equals("4") && !escolha.equals("5"));
+
+        if(escolha.equals("1")){
+            //acao
+        }
+        else if(escolha.equals("2")){
+            //cripto
+        }
+        else if(escolha.equals("3")){
+            //fii
+        }
+        else if(escolha.equals("4")){
+            //stock
+        }
+        else{
+            //tesouro
+        }
+    }
     private static void esperar(long ms){
         try{
             Thread.sleep(ms);
