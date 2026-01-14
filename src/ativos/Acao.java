@@ -7,6 +7,7 @@ public class Acao extends AtivosNacionais {
     public Acao(String nome, String ticker, double precoAtual, int qualificado){
         super(nome, ticker, precoAtual);
         this.qualificado = qualificado;
+        rendaVariavel = true;
     }
 
     public void confereTipo(){

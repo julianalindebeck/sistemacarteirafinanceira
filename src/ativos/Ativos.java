@@ -4,6 +4,7 @@ public abstract class Ativos {
     protected String nome;
     protected String ticker;
     protected double precoAtual;
+    protected boolean rendaVariavel;
 
     public Ativos(String nome, String ticker, double precoAtual){
         this.nome = nome;
@@ -21,5 +22,9 @@ public abstract class Ativos {
     
     public double getPrecoAtual(){
         return precoAtual;
+    }
+
+    public boolean getRenda(){
+        return rendaVariavel;
     }
 }

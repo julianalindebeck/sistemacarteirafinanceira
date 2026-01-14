@@ -8,5 +8,6 @@ public class Stock extends AtivosInternacionais {
         super(nome, ticker, precoAtual);
         this.bolsa = bolsa;
         this.setor = setor;
+        rendaVariavel = true;
     }
 }

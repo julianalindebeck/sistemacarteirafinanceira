@@ -8,5 +8,6 @@ public class Tesouro extends AtivosNacionais {
         super(nome, ticker, precoAtual);
         this.rendimento = rendimento;
         this.vencimento = vencimento;
+        rendaVariavel = false;
     }
 }

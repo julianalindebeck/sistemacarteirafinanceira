@@ -10,4 +10,5 @@ public abstract class AtivosInternacionais extends Ativos {
     public double conversao(){
         return fatorConversao * precoAtual;
     }
+    
 }

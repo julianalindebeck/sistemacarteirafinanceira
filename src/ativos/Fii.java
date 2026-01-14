@@ -10,8 +10,10 @@ public class Fii extends AtivosNacionais {
         this.segmento = segmento;
         this.dividendo = dividendo;
         this.taxaAdm = taxaAdm;
+        rendaVariavel = true;
     }
 
+    //interface?
     public void exibirTaxa(){
         System.out.println(taxaAdm + "%");
     }

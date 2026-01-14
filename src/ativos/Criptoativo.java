@@ -8,6 +8,7 @@ public class Criptoativo extends AtivosInternacionais {
         super(nome, ticker, precoAtual);
         this.algoritmo = algoritmo;
         this.qtdMax = qtdMax;
+        rendaVariavel = true;
     }
 
 }
