@@ -55,16 +55,15 @@ public class Leitor {
             String nome = c[1];
             double precoaAtual = Double.parseDouble(c[2]);
             String algoritmo = c[3];
-            int qtdMax = 0;
-            
-            try{
-                if(c.length >= 5 && !c[4].isEmpty())
-                    qtdMax = Integer.parseInt(c[4]);
-            }
-            catch(NumberFormatException e){
-                System.out.println("sla");
-            }
+            String qtdMax;
 
+            try{
+                qtdMax = c[4];
+            }
+            catch(ArrayIndexOutOfBoundsException e){
+                qtdMax = "Indefinido";
+            }
+            
             lista.add(new Criptoativo(nome, ticker, precoaAtual, algoritmo, qtdMax));
         }
 
@@ -83,7 +82,7 @@ public class Leitor {
             try{
                 precoaAtual = Double.parseDouble(c[3]);
             }
-            catch(Exception e){
+            catch(NumberFormatException e){
                 precoaAtual = 0;
             }
 
