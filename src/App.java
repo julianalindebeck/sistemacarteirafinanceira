@@ -92,19 +92,7 @@ public class App {
             System.out.println("Digite o Preço Atual: ");
             double precoAtual = verificaDouble();
 
-            boolean qualificado = false;
-            boolean entradaValida = false;
-
-            while (!entradaValida) {
-                try{
-                    System.out.println("Digite o Qualificado: ");
-                    qualificado = leitura.nextBoolean();
-                    entradaValida = true;
-                } catch(InputMismatchException e){
-                    System.out.println("Entrada Inválida!");
-                    leitura.next();
-                }
-            }
+            boolean qualificado = verificaQualificado();
 
             leitura.nextLine();
             Acao ativoAcao = new Acao(nome, ticker, precoAtual, qualificado);
@@ -121,25 +109,25 @@ public class App {
             System.out.println("Digite o Preço Atual: ");
             double precoAtual = verificaDouble();
 
-            boolean qualificado = false;
-            boolean entradaValida = false;
-
-            while (!entradaValida) {
-                try{
-                    System.out.println("Digite o Qualificado: ");
-                    qualificado = leitura.nextBoolean();
-                    entradaValida = true;
-                } catch(InputMismatchException e){
-                    System.out.println("Entrada Inválida!");
-                    leitura.next();
-                }
-            }
+            boolean qualificado = verificaQualificado();
 
             System.out.println("Digite o Algoritmo: ");
             String algoritmo = leitura.nextLine();
 
-            System.out.println("Digite a quantidade máxima: ");
-            BigInteger qtdMax = leitura.nextBigInteger();
+            BigInteger qtdMax = BigInteger.ZERO;
+            boolean entradaValida = false;
+
+            while (!entradaValida) {
+                try{
+                    System.out.println("Digite a quantidade máxima: ");
+                    String valor = leitura.nextLine();
+
+                    qtdMax = new BigInteger(valor);
+                    entradaValida = true;
+                } catch(NumberFormatException e){
+                    System.out.println("Entrada Inválida!");
+                }
+            }
 
             leitura.nextLine();
             Criptoativo ativoCriptoativo = new Criptoativo(nome, ticker, precoAtual, algoritmo, qtdMax);
@@ -158,19 +146,7 @@ public class App {
             System.out.println("Digite o Preço Atual: ");
             double precoAtual = verificaDouble();
 
-            boolean qualificado = false;
-            boolean entradaValida = false;
-
-            while (!entradaValida) {
-                try{
-                    System.out.println("Digite o Qualificado: ");
-                    qualificado = leitura.nextBoolean();
-                    entradaValida = true;
-                } catch(InputMismatchException e){
-                    System.out.println("Entrada Inválida!");
-                    leitura.next();
-                }
-            }
+            boolean qualificado = verificaQualificado();
 
             System.out.println("Digite o Segmento: ");
             String segmento = leitura.nextLine();
@@ -199,19 +175,7 @@ public class App {
             System.out.println("Digite o Preço Atual: ");
             double precoAtual = verificaDouble();
 
-            boolean qualificado = false;
-            boolean entradaValida = false;
-
-            while (!entradaValida) {
-                try{
-                    System.out.println("Digite o Qualificado: ");
-                    qualificado = leitura.nextBoolean();
-                    entradaValida = true;
-                } catch(InputMismatchException e){
-                    System.out.println("Entrada Inválida!");
-                    leitura.next();
-                }
-            }
+            boolean qualificado = verificaQualificado();
 
             System.out.println("Digite a Bolsa: ");
             String bolsa = leitura.nextLine();
@@ -236,19 +200,7 @@ public class App {
             System.out.println("Digite o Preço Atual: ");
             double precoAtual = verificaDouble();
 
-            boolean qualificado = false;
-            boolean entradaValida = false;
-
-            while (!entradaValida) {
-                try{
-                    System.out.println("Digite o Qualificado: ");
-                    qualificado = leitura.nextBoolean();
-                    entradaValida = true;
-                } catch(InputMismatchException e){
-                    System.out.println("Entrada Inválida!");
-                    leitura.next();
-                }
-            }
+            boolean qualificado = verificaQualificado();
 
             System.out.println("Digite o Rendimento: ");
             String rendimento = leitura.nextLine();
@@ -446,7 +398,6 @@ public class App {
         //selecionar investidor pelo id
     }
 
-
     public static double verificaDouble(){
         double valor = 0.0;
         boolean entradaValida = false;
@@ -454,13 +405,29 @@ public class App {
             try{
                 valor = leitura.nextDouble();
                 entradaValida = true;
-            } catch(NumberFormatException e){
-                System.out.println("Entrada Inválida!");
-                leitura.next();
+            } catch(InputMismatchException e){
+                System.out.println("Entrada Inválida! Digite novamente");
             }
         }
         return valor;
     }
+    
+    public static boolean verificaQualificado(){
+        boolean qualificado = false;
+        boolean entradaValida = false;
+
+        while (!entradaValida) {
+            try{
+                System.out.println("Digite o Qualificado: ");
+                qualificado = leitura.nextBoolean();
+                entradaValida = true;
+            } catch(InputMismatchException e){
+                System.out.println("Entrada Inválida!");
+            }
+        }
+        return qualificado;
+    }
+
     private static void esperar(long ms){
         try{
             Thread.sleep(ms);
@@ -469,4 +436,5 @@ public class App {
             Thread.currentThread().interrupt();
         }
     }
+
 }
