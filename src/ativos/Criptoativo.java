@@ -12,5 +12,5 @@ public class Criptoativo extends AtivosInternacionais {
         this.qtdMax = qtdMax;
         rendaVariavel = true;
     }
-
+    
 }

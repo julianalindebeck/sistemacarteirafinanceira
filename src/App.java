@@ -19,10 +19,6 @@ public class App {
         List<Tesouro> tesouros = Leitor.listaTesouro();
         List<Stock> stocks = Leitor.listaStock();
 
-        for (Criptoativo a : criptoativos) {
-            System.out.println(a);
-        }
-       
         //menu inicial 
         menuInicial();
     }
