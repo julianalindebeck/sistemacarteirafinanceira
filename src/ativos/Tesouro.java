@@ -10,4 +10,5 @@ public class Tesouro extends AtivosNacionais {
         this.vencimento = vencimento;
         rendaVariavel = false;
     }
+
 }

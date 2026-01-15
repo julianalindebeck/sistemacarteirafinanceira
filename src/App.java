@@ -11,16 +11,17 @@ import leituraDeArquivos.Leitor;
 public class App {
     static Scanner leitura = new Scanner(System.in);
     static String escolha;
+
     public static void main(String[] args) throws Exception {
         List<Acao> acoes = Leitor.listaAcao();
         List<Criptoativo> criptoativos = Leitor.listaCriptoativo();
-        //List<Fii> fiis = Leitor.listaFii();
-        //List<Tesouro> tesouros = Leitor.listaTesouro();
-        //List<Stock> stocks = Leitor.listaStock();
+        List<Fii> fiis = Leitor.listaFii();
+        List<Tesouro> tesouros = Leitor.listaTesouro();
+        List<Stock> stocks = Leitor.listaStock();
 
-        /*for (Fii a : fiis) {
+        for (Criptoativo a : criptoativos) {
             System.out.println(a);
-        }*/
+        }
        
         //menu inicial 
         menuInicial();

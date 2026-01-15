@@ -2,6 +2,7 @@ package leituraDeArquivos;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +39,25 @@ public class Leitor {
         for (String[] c : lerCSV("arquivos/acao.csv")){
             String ticker = c[0];
             String nome = c[1];
-            double precoaAtual = Double.parseDouble(c[2]);
-            int qualificado = Integer.parseInt(c[3]);
+            double precoaAtual = converteDouble(c[2]);
+            boolean qualificado = Boolean.parseBoolean(c[3]);
 
             lista.add(new Acao(nome, ticker, precoaAtual, qualificado));
+        }
+
+        //define o tipo baseado no último valor do ticker
+        for(Acao a : lista){
+            int pos = a.getTicker().length() - 1;
+
+            if(a.getTicker().charAt(pos) == '3'){
+                a.setTipo("Ordinária");
+            }
+            else if(a.getTicker().charAt(pos) == '1'){
+                a.setTipo("Unit");
+            }
+            else {
+                a.setTipo("Preferencial");
+            }
         }
 
         return lista;
@@ -55,13 +71,16 @@ public class Leitor {
             String nome = c[1];
             double precoaAtual = Double.parseDouble(c[2]);
             String algoritmo = c[3];
-            String qtdMax;
+
+            String val;
+            BigInteger qtdMax;
 
             try{
-                qtdMax = c[4];
+                val = c[4];
+                qtdMax = new BigInteger(val);
             }
             catch(ArrayIndexOutOfBoundsException e){
-                qtdMax = "Indefinido";
+                qtdMax = new BigInteger("0");
             }
             
             lista.add(new Criptoativo(nome, ticker, precoaAtual, algoritmo, qtdMax));
@@ -77,17 +96,9 @@ public class Leitor {
             String ticker = c[0];
             String nome = c[1];
             String segmento = c[2];
-            double precoaAtual;
-
-            try{
-                precoaAtual = Double.parseDouble(c[3]);
-            }
-            catch(NumberFormatException e){
-                precoaAtual = 0;
-            }
-
-            double dividendo = Double.parseDouble(c[4]);
-            double taxaAdm = Double.parseDouble(c[5]);
+            double precoaAtual = converteDouble(c[3]);
+            double dividendo = converteDouble(c[4]);
+            double taxaAdm = converteDouble(c[5]);
 
             lista.add(new Fii(nome, ticker, precoaAtual, segmento, dividendo, taxaAdm));
         }
@@ -125,5 +136,15 @@ public class Leitor {
 
         return lista;
     }
+
+    private static double converteDouble(String val){
+        try{
+            val = val.replace(".", "").replace(",", ".");
+            return Double.parseDouble(val);
+        }
+        catch(NumberFormatException e){
+            return 0.0;
+        }
+    } 
 
 }

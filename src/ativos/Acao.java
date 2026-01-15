@@ -2,25 +2,20 @@ package ativos;
 
 public class Acao extends AtivosNacionais {
     private String tipo;
-    private int qualificado;
+    private boolean qualificado;
 
-    public Acao(String nome, String ticker, double precoAtual, int qualificado){
+    public Acao(String nome, String ticker, double precoAtual, boolean qualificado){
         super(nome, ticker, precoAtual);
         this.qualificado = qualificado;
         rendaVariavel = true;
     }
 
-    public void confereTipo(){
-        int pos = ticker.length() - 1;
-
-        if(ticker.charAt(pos) == '3'){
-            this.tipo = "Ordinária";
-        }
-        else if(ticker.charAt(pos) == '1'){
-            this.tipo = "Unit";
-        }
-        else {
-            this.tipo = "Preferencial";
-        }
+    public String getTipo(){
+        return this.tipo;
     }
+
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+
 }

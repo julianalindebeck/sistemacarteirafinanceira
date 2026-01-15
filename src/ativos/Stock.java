@@ -10,4 +10,5 @@ public class Stock extends AtivosInternacionais {
         this.setor = setor;
         rendaVariavel = true;
     }
+
 }
