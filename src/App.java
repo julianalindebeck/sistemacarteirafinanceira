@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -81,18 +83,184 @@ public class App {
 
         if(escolha.equals("1")){
             //cadastrarAção();
+            System.out.println("Digite o Nome: ");
+            String nome = leitura.nextLine();
+
+            System.out.println("Digite o Ticker: ");
+            String ticker = leitura.nextLine();
+
+            System.out.println("Digite o Preço Atual: ");
+            double precoAtual = verificaDouble();
+
+            boolean qualificado = false;
+            boolean entradaValida = false;
+
+            while (!entradaValida) {
+                try{
+                    System.out.println("Digite o Qualificado: ");
+                    qualificado = leitura.nextBoolean();
+                    entradaValida = true;
+                } catch(InputMismatchException e){
+                    System.out.println("Entrada Inválida!");
+                    leitura.next();
+                }
+            }
+
+            leitura.nextLine();
+            Acao ativoAcao = new Acao(nome, ticker, precoAtual, qualificado);
+            System.out.println("Ação cadastrada com sucesso!");
         }
         else if(escolha.equals("2")){
             //cadastrarCriptoativo();
+            System.out.println("Digite o Nome: ");
+            String nome = leitura.nextLine();
+
+            System.out.println("Digite o Ticker: ");
+            String ticker = leitura.nextLine();
+
+            System.out.println("Digite o Preço Atual: ");
+            double precoAtual = verificaDouble();
+
+            boolean qualificado = false;
+            boolean entradaValida = false;
+
+            while (!entradaValida) {
+                try{
+                    System.out.println("Digite o Qualificado: ");
+                    qualificado = leitura.nextBoolean();
+                    entradaValida = true;
+                } catch(InputMismatchException e){
+                    System.out.println("Entrada Inválida!");
+                    leitura.next();
+                }
+            }
+
+            System.out.println("Digite o Algoritmo: ");
+            String algoritmo = leitura.nextLine();
+
+            System.out.println("Digite a quantidade máxima: ");
+            BigInteger qtdMax = leitura.nextBigInteger();
+
+            leitura.nextLine();
+            Criptoativo ativoCriptoativo = new Criptoativo(nome, ticker, precoAtual, algoritmo, qtdMax);
+            ativoCriptoativo.setQualificado(qualificado);
+
+            System.out.println("Criptoativo cadastrado com sucesso!");
         }
         else if(escolha.equals("3")){
             //cadastrarFii();
+            System.out.println("Digite o Nome: ");
+            String nome = leitura.nextLine();
+
+            System.out.println("Digite o Ticker: ");
+            String ticker = leitura.nextLine();
+
+            System.out.println("Digite o Preço Atual: ");
+            double precoAtual = verificaDouble();
+
+            boolean qualificado = false;
+            boolean entradaValida = false;
+
+            while (!entradaValida) {
+                try{
+                    System.out.println("Digite o Qualificado: ");
+                    qualificado = leitura.nextBoolean();
+                    entradaValida = true;
+                } catch(InputMismatchException e){
+                    System.out.println("Entrada Inválida!");
+                    leitura.next();
+                }
+            }
+
+            System.out.println("Digite o Segmento: ");
+            String segmento = leitura.nextLine();
+
+            System.out.println("Digite o Dividendo: ");
+            double dividendo = verificaDouble();
+
+            System.out.println("Digite a Taxa Adm: ");
+            double taxaAdm = verificaDouble();
+
+            leitura.nextLine();
+            Fii ativoFii = new Fii(nome, ticker, precoAtual, segmento, dividendo, taxaAdm);
+            ativoFii.setQualificado(qualificado);
+
+            System.out.println("Fii cadastrado com sucesso!");
+            
         }
         else if(escolha.equals("4")){
             //cadastrarStock();
+            System.out.println("Digite o Nome: ");
+            String nome = leitura.nextLine();
+
+            System.out.println("Digite o Ticker: ");
+            String ticker = leitura.nextLine();
+
+            System.out.println("Digite o Preço Atual: ");
+            double precoAtual = verificaDouble();
+
+            boolean qualificado = false;
+            boolean entradaValida = false;
+
+            while (!entradaValida) {
+                try{
+                    System.out.println("Digite o Qualificado: ");
+                    qualificado = leitura.nextBoolean();
+                    entradaValida = true;
+                } catch(InputMismatchException e){
+                    System.out.println("Entrada Inválida!");
+                    leitura.next();
+                }
+            }
+
+            System.out.println("Digite a Bolsa: ");
+            String bolsa = leitura.nextLine();
+
+            System.out.println("Digite o Setor: ");
+            String setor = leitura.nextLine();
+
+            leitura.nextLine();
+            Stock ativoStock = new Stock(nome, ticker, precoAtual, bolsa, setor);
+            ativoStock.setQualificado(qualificado);
+
+            System.out.println("Stock cadastrado com sucesso!");
         }
         else if(escolha.equals("5")){
             //cadastrarTesouro();
+            System.out.println("Digite o Nome: ");
+            String nome = leitura.nextLine();
+
+            System.out.println("Digite o Ticker: ");
+            String ticker = leitura.nextLine();
+
+            System.out.println("Digite o Preço Atual: ");
+            double precoAtual = verificaDouble();
+
+            boolean qualificado = false;
+            boolean entradaValida = false;
+
+            while (!entradaValida) {
+                try{
+                    System.out.println("Digite o Qualificado: ");
+                    qualificado = leitura.nextBoolean();
+                    entradaValida = true;
+                } catch(InputMismatchException e){
+                    System.out.println("Entrada Inválida!");
+                    leitura.next();
+                }
+            }
+
+            System.out.println("Digite o Rendimento: ");
+            String rendimento = leitura.nextLine();
+
+            System.out.println("Digite o Vencimento: ");
+            String vencimento = leitura.nextLine();
+
+            leitura.nextLine();
+            Tesouro ativoTesouro = new Tesouro(nome, ticker, precoAtual, rendimento, vencimento);
+            ativoTesouro.setQualificado(qualificado);
+
+            System.out.println("Tesouro cadastrado com sucesso!");
         }
         else{
             return;
@@ -278,6 +446,21 @@ public class App {
         //selecionar investidor pelo id
     }
 
+
+    public static double verificaDouble(){
+        double valor = 0.0;
+        boolean entradaValida = false;
+        while (!entradaValida) {
+            try{
+                valor = leitura.nextDouble();
+                entradaValida = true;
+            } catch(NumberFormatException e){
+                System.out.println("Entrada Inválida!");
+                leitura.next();
+            }
+        }
+        return valor;
+    }
     private static void esperar(long ms){
         try{
             Thread.sleep(ms);

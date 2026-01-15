@@ -12,5 +12,21 @@ public class Criptoativo extends AtivosInternacionais {
         this.qtdMax = qtdMax;
         rendaVariavel = true;
     }
+
+    public void setAlgoritmo(String algoritmo){
+        this.algoritmo = algoritmo;
+    }
+
+    public String getAlgoritmo(){
+        return algoritmo;
+    }
+
+    public BigInteger getQtdMax(){
+        return qtdMax;
+    }
+
+    public void setQtdMax(BigInteger qtdMax){
+        this.qtdMax = qtdMax;
+    }
     
 }

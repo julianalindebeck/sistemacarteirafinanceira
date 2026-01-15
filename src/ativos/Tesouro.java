@@ -11,4 +11,19 @@ public class Tesouro extends AtivosNacionais {
         rendaVariavel = false;
     }
 
+    public String getRendimento(){
+        return rendimento;
+    }
+
+    public void setRendimento(String rendimento){
+        this.rendimento = rendimento;
+    }
+
+    public String getInvestimento(){
+        return vencimento;
+    }
+    
+    public void setVencimento(String vencimento){
+        this.vencimento = vencimento;
+    }
 }
