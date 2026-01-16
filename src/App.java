@@ -94,7 +94,6 @@ public class App {
 
             boolean qualificado = verificaQualificado();
 
-            leitura.nextLine();
             Acao ativoAcao = new Acao(nome, ticker, precoAtual, qualificado);
             System.out.println("Ação cadastrada com sucesso!");
         }
@@ -117,19 +116,18 @@ public class App {
             BigInteger qtdMax = BigInteger.ZERO;
             boolean entradaValida = false;
 
-            while (!entradaValida) {
+            while (true) {
                 try{
                     System.out.println("Digite a quantidade máxima: ");
                     String valor = leitura.nextLine();
 
                     qtdMax = new BigInteger(valor);
-                    entradaValida = true;
+                    break;
                 } catch(NumberFormatException e){
                     System.out.println("Entrada Inválida!");
                 }
             }
 
-            leitura.nextLine();
             Criptoativo ativoCriptoativo = new Criptoativo(nome, ticker, precoAtual, algoritmo, qtdMax);
             ativoCriptoativo.setQualificado(qualificado);
 
@@ -157,7 +155,6 @@ public class App {
             System.out.println("Digite a Taxa Adm: ");
             double taxaAdm = verificaDouble();
 
-            leitura.nextLine();
             Fii ativoFii = new Fii(nome, ticker, precoAtual, segmento, dividendo, taxaAdm);
             ativoFii.setQualificado(qualificado);
 
@@ -183,7 +180,6 @@ public class App {
             System.out.println("Digite o Setor: ");
             String setor = leitura.nextLine();
 
-            leitura.nextLine();
             Stock ativoStock = new Stock(nome, ticker, precoAtual, bolsa, setor);
             ativoStock.setQualificado(qualificado);
 
@@ -208,7 +204,6 @@ public class App {
             System.out.println("Digite o Vencimento: ");
             String vencimento = leitura.nextLine();
 
-            leitura.nextLine();
             Tesouro ativoTesouro = new Tesouro(nome, ticker, precoAtual, rendimento, vencimento);
             ativoTesouro.setQualificado(qualificado);
 
@@ -399,33 +394,30 @@ public class App {
     }
 
     public static double verificaDouble(){
-        double valor = 0.0;
-        boolean entradaValida = false;
-        while (!entradaValida) {
+        while (true) {
             try{
-                valor = leitura.nextDouble();
-                entradaValida = true;
+                double valor = leitura.nextDouble();
+                leitura.nextLine();
+                return valor;
             } catch(InputMismatchException e){
                 System.out.println("Entrada Inválida! Digite novamente");
+                leitura.nextLine();
             }
         }
-        return valor;
     }
     
     public static boolean verificaQualificado(){
-        boolean qualificado = false;
-        boolean entradaValida = false;
-
-        while (!entradaValida) {
+        while (true) {
             try{
                 System.out.println("Digite o Qualificado: ");
-                qualificado = leitura.nextBoolean();
-                entradaValida = true;
+                boolean qualificado = leitura.nextBoolean();
+                leitura.nextLine();
+                return qualificado;
             } catch(InputMismatchException e){
                 System.out.println("Entrada Inválida!");
+                leitura.nextLine();
             }
         }
-        return qualificado;
     }
 
     private static void esperar(long ms){
