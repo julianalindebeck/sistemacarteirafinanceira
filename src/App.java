@@ -160,19 +160,19 @@ public class App {
         }while(!escolha.equals("1") && !escolha.equals("2") && !escolha.equals("3") && !escolha.equals("4") && !escolha.equals("5"));
 
         if(escolha.equals("1")){
-            //acao
+            excluirAcao();
         }
         else if(escolha.equals("2")){
-            //cripto
+            excluirCriptoativo();
         }
         else if(escolha.equals("3")){
-            //fii
+            excluirFii();
         }
-        else if(escolha.equals("4")){
-            //stock
+        else if(escolha.equals("4")){       
+            excluirStock();
         }
         else{
-            //tesouro
+            excluirTesouro();
         }
     }
     
@@ -442,6 +442,102 @@ public class App {
 
         System.out.println("Tesouro atualizado com sucesso!");
     }
+    
+    private static void excluirAcao() {
+        exibirAcoes();
+
+        System.out.print("\nDigite o ticker da ação que deseja excluir: ");
+        String ticker = leitura.nextLine();
+
+        Acao a = buscarAcao(ticker);
+
+        if (a == null) {
+            System.out.println("\nTicker não encontrado.");
+            return;
+        }
+
+        System.out.println("\nAção encontrada");
+
+        acoes.remove(a);
+        System.out.println("\nAção excluída com sucesso!");
+    }
+
+    private static void excluirCriptoativo() {
+        exibirCriptoativos();
+
+        System.out.print("\nDigite o ticker do criptoativo que deseja excluir: ");
+        String ticker = leitura.nextLine();
+
+        Criptoativo c = buscarCriptoativo(ticker);
+
+        if (c == null) {
+            System.out.println("\nTicker não encontrado.");
+            return;
+        }
+
+        System.out.println("\nCriptoativo encontrado");
+
+        criptoativos.remove(c);
+        System.out.println("\nCriptoativo excluído com sucesso!");
+    }
+    
+    private static void excluirFii() {
+        exibirFii();
+
+        System.out.print("\nDigite o ticker do FII que deseja excluir: ");
+        String ticker = leitura.nextLine();
+
+        Fii f = buscarFii(ticker);
+
+        if (f == null) {
+            System.out.println("\nTicker não encontrado.");
+            return;
+        }
+
+        System.out.println("\nFII encontrado");
+
+        fiis.remove(f);
+        System.out.println("\nFII excluído com sucesso!");
+    }
+
+    private static void excluirStock() {
+        exibirStock();
+
+        System.out.print("\nDigite o ticker do Stock que deseja excluir: ");
+        String ticker = leitura.nextLine();
+
+        Stock s = buscarStock(ticker);
+
+        if (s == null) {
+            System.out.println("\nTicker não encontrado.");
+            return;
+        }
+
+        System.out.println("\nStock encontrado");
+
+        stocks.remove(s);
+        System.out.println("\nStock excluído com sucesso!");
+    }
+
+    private static void excluirTesouro() {
+        exibirTesouro();
+
+        System.out.print("\nDigite o ticker do Tesouro que deseja excluir: ");
+        String ticker = leitura.nextLine();
+
+        Tesouro t = buscarTesouro(ticker);
+
+        if (t == null) {
+            System.out.println("\nTicker não encontrado.");
+            return;
+        }
+
+        System.out.println("\nTesouro encontrado");
+
+        tesouros.remove(t);
+        System.out.println("\nTesouro excluído com sucesso!");
+    }
+    
     //investidores
     public static void menuInvestidor(){
         System.out.println("\n*------------*\nMENU INVESTIDOR\n*------------*");
