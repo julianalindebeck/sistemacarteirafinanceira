@@ -127,12 +127,13 @@ public class App {
 
     public static void editarAtivo(){
         do{
-            System.out.println("Escolha:\n(1) Ação\n(2) Criptoativos\n(3) Fundo de Investimento Imobiliário\n(4) Stock\n(5) Tesouro");
+            System.out.println("\nEscolha:\n(1) Ação\n(2) Criptoativos\n(3) Fundo de Investimento Imobiliário\n(4) Stock\n(5) Tesouro");
             escolha = leitura.nextLine();
         }while(!escolha.equals("1") && !escolha.equals("2") && !escolha.equals("3") && !escolha.equals("4") && !escolha.equals("5"));
 
         if(escolha.equals("1")){
-            //acao
+            exibirAcoes();
+            editarAcao();
         }
         else if(escolha.equals("2")){
             //cripto
@@ -173,7 +174,7 @@ public class App {
     
     public static void exibirRelatorioAtivo(){
         do{
-            System.out.println("Escolha:(1) Todos os Ativos \n(2) Ação\n(3) Criptoativo\n(4) Fundo de Investimento Imobiliário\n(5) Stock\n(6) Tesouro");
+            System.out.println("Escolha:\n(1) Todos os Ativos \n(2) Ação\n(3) Criptoativo\n(4) Fundo de Investimento Imobiliário\n(5) Stock\n(6) Tesouro");
             escolha = leitura.nextLine();
         }while(!escolha.equals("1") && !escolha.equals("2") && !escolha.equals("3") && !escolha.equals("4") && !escolha.equals("5") && !escolha.equals("6"));
 
@@ -234,6 +235,41 @@ public class App {
             System.out.println(t);
         }
     }
+
+    private static Acao buscarAcao(String ticker) {
+        for (Acao a : acoes) {
+            if (a.getTicker().equalsIgnoreCase(ticker)) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    private static void editarAcao() {
+        System.out.print("Digite o ticker da ação que deseja editar: ");
+        String ticker = leitura.nextLine();
+
+        Acao a = buscarAcao(ticker);
+
+        if (a == null) {
+            System.out.println("\nTicker não encontrado.");
+            return;
+        }
+
+        System.out.println("\nAção encontrada!");
+
+        System.out.print("Digite o novo nome: ");
+        a.setNome(leitura.nextLine());
+
+        System.out.print("Digite o novo preço: ");
+        a.setPrecoAtual(verificaDouble());
+
+        System.out.print("Digite o novo qualificado: ");
+        a.setQualificado(verificaQualificado());
+
+        System.out.println("Ação atualizada com sucesso!");
+    }
+
     
     //investidores
     public static void menuInvestidor(){
