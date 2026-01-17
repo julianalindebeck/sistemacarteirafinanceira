@@ -206,24 +206,35 @@ public class App {
     }
 
     public static void exibirAcoes(){
-
+        for (Acao a : acoes) {
+            System.out.println(a);
+        }
     }
 
     public static void exibirCriptoativos(){
-
+        for (Criptoativo c : criptoativos) {
+            System.out.println(c);
+        }
     }
 
     public static void exibirFii(){
-
+        for (Fii f : fiis) {
+            System.out.println(f);
+        }
     }
 
     public static void exibirStock(){
-
+        for (Stock s : stocks) {
+            System.out.println(s);
+        }
     }
 
     public static void exibirTesouro(){
-
+        for (Tesouro t : tesouros) {
+            System.out.println(t);
+        }
     }
+    
     //investidores
     public static void menuInvestidor(){
         System.out.println("\n*------------*\nMENU INVESTIDOR\n*------------*");

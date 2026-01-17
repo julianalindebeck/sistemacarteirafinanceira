@@ -17,4 +17,14 @@ public class Acao extends AtivosNacionais {
         return this.tipo;
     }
 
+    @Override
+    public String toString() {
+        return "Ação | " +
+                "Nome: " + nome  +
+                ", Ticker: " + ticker +
+                ", Preço: " + precoAtual +
+                ", Qualificado: " + qualificado +
+                '.';
+    }
+
 }

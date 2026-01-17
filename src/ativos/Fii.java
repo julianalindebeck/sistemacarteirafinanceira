@@ -41,4 +41,16 @@ public class Fii extends AtivosNacionais {
     public void setTaxaAdm(double taxaAdm){
         this.taxaAdm = taxaAdm;
     }
+
+    @Override
+    public String toString() {
+        return "FII | " +
+                "Nome: " + nome  +
+                ", Ticker: " + ticker +
+                ", Preço: " + precoAtual +
+                ", Segmento: " + segmento +
+                ", Dividendo: " + dividendo +
+                ", Taxa: " + taxaAdm +
+                '.';
+    }
 }

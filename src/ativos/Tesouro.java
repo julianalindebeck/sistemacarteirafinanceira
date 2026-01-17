@@ -26,4 +26,15 @@ public class Tesouro extends AtivosNacionais {
     public void setVencimento(String vencimento){
         this.vencimento = vencimento;
     }
+
+    @Override
+    public String toString() {
+        return "Tesouro | " +
+                "Nome: " + nome  +
+                ", Ticker: " + ticker +
+                ", Preço: " + precoAtual +
+                ", Rendimento: " + rendimento +
+                ", Vencimento: " + vencimento +
+                '.';
+    }
 }

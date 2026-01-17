@@ -28,5 +28,16 @@ public class Criptoativo extends AtivosInternacionais {
     public void setQtdMax(BigInteger qtdMax){
         this.qtdMax = qtdMax;
     }
+
+    @Override
+    public String toString() {
+        return "Criptoativo | " +
+                "Nome: " + nome  +
+                ", Ticker: " + ticker +
+                ", Preço: " + precoAtual +
+                ", Algoritmo: " + algoritmo +
+                ", Quantidade Máxima: " + qtdMax +
+                '.';
+    }
     
 }

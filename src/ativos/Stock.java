@@ -26,4 +26,15 @@ public class Stock extends AtivosInternacionais {
     public void setSetor(String setor){
         this.setor = setor;
     }
+
+    @Override
+    public String toString() {
+        return "Stock | " +
+                "Nome: " + nome  +
+                ", Ticker: " + ticker +
+                ", Preço: " + precoAtual +
+                ", Bolsa: " + bolsa +
+                ", Setor: " + setor +
+                '.';
+    }
 }
