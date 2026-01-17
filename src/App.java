@@ -136,16 +136,20 @@ public class App {
             editarAcao();
         }
         else if(escolha.equals("2")){
-            //cripto
+            exibirCriptoativos();
+            editarCriptoativo();
         }
         else if(escolha.equals("3")){
-            //fii
+            exibirFii();
+            editarFii();
         }
         else if(escolha.equals("4")){
-            //stock
+            exibirStock();
+            editarStock();
         }
         else{
-            //tesouro
+            exibirTesouro();
+            editarTesouro();
         }
     }
     
@@ -245,6 +249,42 @@ public class App {
         return null;
     }
 
+    private static Criptoativo buscarCriptoativo(String ticker) {
+        for (Criptoativo c : criptoativos) {
+            if (c.getTicker().equalsIgnoreCase(ticker)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    private static Fii buscarFii(String ticker) {
+        for (Fii f : fiis) {
+            if (f.getTicker().equalsIgnoreCase(ticker)) {
+                return f;
+            }
+        }
+        return null;
+    }
+
+    private static Stock buscarStock(String ticker) {
+        for (Stock s : stocks) {
+            if (s.getTicker().equalsIgnoreCase(ticker)) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    private static Tesouro buscarTesouro(String ticker) {
+        for (Tesouro t : tesouros) {
+            if (t.getTicker().equalsIgnoreCase(ticker)) {
+                return t;
+            }
+        }
+        return null;
+    }
+
     private static void editarAcao() {
         System.out.print("Digite o ticker da ação que deseja editar: ");
         String ticker = leitura.nextLine();
@@ -270,7 +310,138 @@ public class App {
         System.out.println("Ação atualizada com sucesso!");
     }
 
+    private static void editarCriptoativo() {
+        System.out.print("Digite o ticker da ação que deseja editar: ");
+        String ticker = leitura.nextLine();
+
+        Criptoativo c = buscarCriptoativo(ticker);
+
+        if (c == null) {
+            System.out.println("\nTicker não encontrado.");
+            return;
+        }
+
+        System.out.println("\nAção encontrada!");
+
+        System.out.print("Digite o novo nome: ");
+        c.setNome(leitura.nextLine());
+
+        System.out.print("Digite o novo preço: ");
+        c.setPrecoAtual(verificaDouble());
+
+        System.out.print("Digite o novo Algoritmo: ");
+        c.setAlgoritmo(leitura.nextLine());
+
+        BigInteger novaQtdMax;
+
+        while (true) {
+            try {
+                System.out.print("Digite a nova Quantidade Máxima: ");
+                String valor = leitura.nextLine();
+                novaQtdMax = new BigInteger(valor);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida! Digite um número inteiro válido.");
+            }
+        }
+        c.setQtdMax(novaQtdMax);
+
+        System.out.print("Digite o novo qualificado: ");
+        c.setQualificado(verificaQualificado());
+
+        System.out.println("Ação atualizada com sucesso!");
+    }
     
+    private static void editarFii(){
+        System.out.print("Digite o ticker do FII que deseja editar: ");
+        String ticker = leitura.nextLine();
+        Fii f = buscarFii(ticker);
+        
+        if (f == null) {
+            System.out.println("\nTicker não encontrado.");
+            return;
+        }
+
+        System.out.println("\nFII encontrado!");
+        System.out.print("Digite o novo nome: ");
+        f.setNome(leitura.nextLine());
+
+        System.out.print("Digite o novo preço: ");
+        f.setPrecoAtual(verificaDouble());
+
+        System.out.print("Digite o novo segmento: ");
+        f.setSegmento(leitura.nextLine());
+
+        System.out.print("Digite o novo dividendo: ");
+        f.setDividendo(verificaDouble());
+
+        System.out.print("Digite o novo TaxaAdm: ");
+        f.setTaxaAdm(verificaDouble());
+
+        System.out.print("Digite o novo TaxaAdm: ");
+        f.setQualificado(verificaQualificado());
+
+        System.out.println("Fii atualizado com sucesso!");
+    }
+    
+    private static void editarStock(){
+        System.out.print("Digite o ticker do Stock que deseja editar: ");
+        String ticker = leitura.nextLine();
+        Stock s = buscarStock(ticker);
+
+        if (s == null) {
+            System.out.println("\nTicker não encontrado.");
+            return;
+        }
+
+        System.out.println("\nStock encontrado!");
+        System.out.print("Digite o novo nome: ");
+        s.setNome(leitura.nextLine());
+
+        System.out.print("Digite o novo preço: ");
+        s.setPrecoAtual(verificaDouble());
+
+        System.out.print("Digite a nova bolsa: ");
+        s.setBolsa(leitura.nextLine());
+
+        System.out.print("Digite o novo setor: ");
+        s.setSetor(leitura.nextLine());
+
+        System.out.print("Digite o novo qualificado: ");
+        s.setQualificado(verificaQualificado());
+
+        System.out.println("Stock atualizado com sucesso!");
+    
+    }
+    
+    private static void editarTesouro(){
+        System.out.print("Digite o ticker do Tesouro que deseja editar: ");
+        String ticker = leitura.nextLine();
+        Tesouro t = buscarTesouro(ticker);
+
+        if (t == null) {
+            System.out.println("\nTicker não encontrado.");
+            return;
+        }
+
+        System.out.println("\nTesouro encontrado!");
+        System.out.print("Digite o novo nome: ");
+        t.setNome(leitura.nextLine());
+        
+        System.out.print("Digite o novo preço: ");
+        t.setPrecoAtual(verificaDouble());
+
+        System.out.print("Digite o novo rendimento: ");
+        t.setRendimento(leitura.nextLine());
+
+        System.out.print("Digite o novo vencimento: ");
+        t.setVencimento(leitura.nextLine());
+
+        System.out.print("Digite o novo qualificado: ");
+        t.setQualificado(verificaQualificado());
+
+        System.out.println("Tesouro atualizado com sucesso!");
+    }
     //investidores
     public static void menuInvestidor(){
         System.out.println("\n*------------*\nMENU INVESTIDOR\n*------------*");
