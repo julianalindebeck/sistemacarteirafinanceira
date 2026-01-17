@@ -14,13 +14,19 @@ public class App {
     static Scanner leitura = new Scanner(System.in);
     static String escolha;
 
+    static List<Acao> acoes;
+    static List<Criptoativo> criptoativos;
+    static List<Fii> fiis;
+    static List<Tesouro> tesouros;
+    static List<Stock> stocks;
+
     public static void main(String[] args) throws Exception {
         //leitura dos ativos
-        List<Acao> acoes = Leitor.listaAcao("arquivos/acao.csv");
-        List<Criptoativo> criptoativos = Leitor.listaCriptoativo("arquivos/criptoativo.csv");
-        List<Fii> fiis = Leitor.listaFii("arquivos/fii.csv");
-        List<Tesouro> tesouros = Leitor.listaTesouro("arquivos/tesouro.csv");
-        List<Stock> stocks = Leitor.listaStock("arquivos/stock.csv");
+        acoes = Leitor.listaAcao("arquivos/acao.csv");
+        criptoativos = Leitor.listaCriptoativo("arquivos/criptoativo.csv");
+        fiis = Leitor.listaFii("arquivos/fii.csv");
+        tesouros = Leitor.listaTesouro("arquivos/tesouro.csv");
+        stocks = Leitor.listaStock("arquivos/stock.csv");
 
         menuInicial();
     }
@@ -69,7 +75,7 @@ public class App {
             editarAtivo();
         }
         else if(escolha.equals("4")){
-            exlcuirAtivo();
+            excluirAtivo();
         }
         else if(escolha.equals("5")){
             exibirRelatorioAtivo();
@@ -142,7 +148,7 @@ public class App {
         }
     }
     
-    public static void exlcuirAtivo(){
+    public static void excluirAtivo(){
         do{
             System.out.println("Escolha:\n(1) Ação\n(2) Criptoativo\n(3) Fundo de Investimento Imobiliário\n(4) Stock\n(5) Tesouro");
             escolha = leitura.nextLine();
@@ -172,25 +178,52 @@ public class App {
         }while(!escolha.equals("1") && !escolha.equals("2") && !escolha.equals("3") && !escolha.equals("4") && !escolha.equals("5") && !escolha.equals("6"));
 
         if(escolha.equals("1")){
-            //todos os ativos
+            exibirTodos();
         }
         else if(escolha.equals("2")){
-            //acao
+            exibirAcoes();
         }
         else if(escolha.equals("3")){
-            //cripto
+            exibirCriptoativos();
         }
         else if(escolha.equals("4")){
-            //fii
+            exibirFii();
         }
         else if(escolha.equals("5")){
-            //stock
+            exibirStock();
         }
         else{
-            //tesouro
+            exibirTesouro();
         }
     }
 
+    public static void exibirTodos(){
+        exibirAcoes();
+        exibirCriptoativos();
+        exibirFii();
+        exibirStock();
+        exibirTesouro();
+    }
+
+    public static void exibirAcoes(){
+
+    }
+
+    public static void exibirCriptoativos(){
+
+    }
+
+    public static void exibirFii(){
+
+    }
+
+    public static void exibirStock(){
+
+    }
+
+    public static void exibirTesouro(){
+
+    }
     //investidores
     public static void menuInvestidor(){
         System.out.println("\n*------------*\nMENU INVESTIDOR\n*------------*");
@@ -212,7 +245,7 @@ public class App {
             exibirInvestidores();
         }
         else if(escolha.equals("4")){
-            exlcuirInvestidor();
+            excluirInvestidor();
         }
         else if(escolha.equals("5")){
             selecionarInvestidor();
@@ -268,7 +301,7 @@ public class App {
         //exibir todos investidores
     }
     
-    public static void exlcuirInvestidor(){
+    public static void excluirInvestidor(){
         //excluir investidores
     }
 
@@ -292,7 +325,7 @@ public class App {
         if(escolha.equals("1")){
             boolean qualificado = verificaQualificado();
 
-            Acao ativoAcao = new Acao(nome, ticker, precoAtual, qualificado);
+            acoes.add(new Acao(nome, ticker, precoAtual, qualificado));
         }
         else if(escolha.equals("2")){
             boolean qualificado = verificaQualificado();
@@ -312,9 +345,9 @@ public class App {
                     System.out.println("Entrada inválida!");
                 }
             }
-
             Criptoativo ativoCriptoativo = new Criptoativo(nome, ticker, precoAtual, algoritmo, qtdMax);
             ativoCriptoativo.setQualificado(qualificado);
+            criptoativos.add(ativoCriptoativo);
         }
         else if(escolha.equals("3")){
             boolean qualificado = verificaQualificado();
@@ -330,6 +363,7 @@ public class App {
 
             Fii ativoFii = new Fii(nome, ticker, precoAtual, segmento, dividendo, taxaAdm);
             ativoFii.setQualificado(qualificado);
+            fiis.add(ativoFii);
         }
         else if(escolha.equals("4")){
             boolean qualificado = verificaQualificado();
@@ -342,6 +376,7 @@ public class App {
 
             Stock ativoStock = new Stock(nome, ticker, precoAtual, bolsa, setor);
             ativoStock.setQualificado(qualificado);
+            stocks.add(ativoStock);
         }
         else if(escolha.equals("5")){
             boolean qualificado = verificaQualificado();
@@ -354,6 +389,7 @@ public class App {
 
             Tesouro ativoTesouro = new Tesouro(nome, ticker, precoAtual, rendimento, vencimento);
             ativoTesouro.setQualificado(qualificado);
+            tesouros.add(ativoTesouro);
         }
         else{
             return;

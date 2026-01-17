@@ -1,5 +1,7 @@
 package ativos;
 
+import excecoes.InvalidNumberException;
+
 public abstract class Ativos {
     protected String nome;
     protected String ticker;
@@ -31,6 +33,9 @@ public abstract class Ativos {
     }
     
     public void setPrecoAtual(double precoAtual){
+        if(precoAtual<=0){
+            throw new InvalidNumberException();
+        }
         this.precoAtual = precoAtual;
     }
 
