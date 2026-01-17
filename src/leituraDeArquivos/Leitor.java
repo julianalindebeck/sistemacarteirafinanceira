@@ -33,10 +33,10 @@ public class Leitor {
         return linhas;
     }
 
-    public static List<Acao> listaAcao(){
+    public static List<Acao> listaAcao(String caminho){
         List<Acao> lista = new ArrayList<>();
 
-        for (String[] c : lerCSV("arquivos/acao.csv")){
+        for (String[] c : lerCSV(caminho)){
             String ticker = c[0];
             String nome = c[1];
             double precoaAtual = converteDouble(c[2]);
@@ -63,10 +63,10 @@ public class Leitor {
         return lista;
     }
 
-    public static List<Criptoativo> listaCriptoativo(){
+    public static List<Criptoativo> listaCriptoativo(String caminho){
         List<Criptoativo> lista = new ArrayList<>();
 
-        for (String[] c : lerCSV("arquivos/criptoativo.csv")){
+        for (String[] c : lerCSV(caminho)){
             String ticker = c[0];
             String nome = c[1];
             double precoaAtual = Double.parseDouble(c[2]);
@@ -89,10 +89,10 @@ public class Leitor {
         return lista;
     }
 
-    public static List<Fii> listaFii(){
+    public static List<Fii> listaFii(String caminho){
         List<Fii> lista = new ArrayList<>();
 
-        for (String[] c : lerCSV("arquivos/fii.csv")){
+        for (String[] c : lerCSV(caminho)){
             String ticker = c[0];
             String nome = c[1];
             String segmento = c[2];
@@ -106,10 +106,10 @@ public class Leitor {
         return lista;
     }
 
-    public static List<Tesouro> listaTesouro(){
+    public static List<Tesouro> listaTesouro(String caminho){
         List<Tesouro> lista = new ArrayList<>();
 
-        for (String[] c : lerCSV("arquivos/tesouro.csv")){
+        for (String[] c : lerCSV(caminho)){
             String ticker = c[0];
             String nome = c[1];
             double precoaAtual = Double.parseDouble(c[2]);
@@ -121,10 +121,10 @@ public class Leitor {
         return lista;
     }
 
-    public static List<Stock> listaStock(){
+    public static List<Stock> listaStock(String caminho){
         List<Stock> lista = new ArrayList<>();
 
-        for (String[] c : lerCSV("arquivos/stock.csv")){
+        for (String[] c : lerCSV(caminho)){
             String ticker = c[0];
             String nome = c[1];
             double precoaAtual = Double.parseDouble(c[2]);
