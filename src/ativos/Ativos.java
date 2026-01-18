@@ -1,6 +1,7 @@
 package ativos;
 
-import excecoes.InvalidNumberException;
+import excecoes.InvalidPriceException;
+import excecoes.InvalidTickerException;
 
 public abstract class Ativos {
     protected String nome;
@@ -25,6 +26,10 @@ public abstract class Ativos {
     }
 
     public void setTicker(String ticker){
+        if(ticker == null || ticker == "0"){
+            throw new InvalidTickerException();
+        }
+
         this.ticker = ticker;
     }
 
@@ -33,9 +38,10 @@ public abstract class Ativos {
     }
     
     public void setPrecoAtual(double precoAtual){
-        if(precoAtual<=0){
-            throw new InvalidNumberException();
+        if(precoAtual <= 0){
+            throw new InvalidPriceException();
         }
+        
         this.precoAtual = precoAtual;
     }
 

@@ -21,12 +21,12 @@ public class Criptoativo extends AtivosInternacionais {
         return algoritmo;
     }
 
-    public BigInteger getQtdMax(){
-        return qtdMax;
-    }
-
     public void setQtdMax(BigInteger qtdMax){
         this.qtdMax = qtdMax;
+    }
+
+    public BigInteger getQtdMax(){
+        return qtdMax;
     }
 
     @Override

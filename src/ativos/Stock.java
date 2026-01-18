@@ -11,20 +11,20 @@ public class Stock extends AtivosInternacionais {
         rendaVariavel = true;
     }
 
-    public String getBolsa(){
-        return bolsa;
-    }
-
     public void setBolsa(String bolsa){
         this.bolsa = bolsa;
     }
 
-    public String getSetor(){
-        return setor;
+    public String getBolsa(){
+        return bolsa;
     }
     
     public void setSetor(String setor){
         this.setor = setor;
+    }
+
+    public String getSetor(){
+        return setor;
     }
 
     @Override

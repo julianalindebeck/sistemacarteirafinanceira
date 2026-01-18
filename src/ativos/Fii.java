@@ -18,28 +18,28 @@ public class Fii extends AtivosNacionais {
         System.out.println(taxaAdm + "%");
     }
 
-    public String getSegmento(){
-        return segmento;
-    }
-
     public void setSegmento(String segmento){
         this.segmento = segmento;
     }
 
-    public double getDividendo(){
-        return dividendo;
+    public String getSegmento(){
+        return segmento;
     }
 
     public void setDividendo(double dividendo){
         this.dividendo = dividendo;
     }
-    
-    public double getTaxaAdm(){
-        return taxaAdm;
+
+    public double getDividendo(){
+        return dividendo;
     }
     
     public void setTaxaAdm(double taxaAdm){
         this.taxaAdm = taxaAdm;
+    }
+
+    public double getTaxaAdm(){
+        return taxaAdm;
     }
 
     @Override

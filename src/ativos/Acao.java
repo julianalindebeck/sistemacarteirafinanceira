@@ -26,5 +26,5 @@ public class Acao extends AtivosNacionais {
                 ", Qualificado: " + qualificado +
                 '.';
     }
-
+    
 }
