@@ -759,7 +759,13 @@ public class App {
     }
     
     public static void exibirInvestidores(){
-        //exibir todos investidores
+        for(PessoaFisica p : pessoaFisica){
+            System.out.println(p);
+        }
+
+        for(Institucional i : institucional){
+            System.out.println(i);
+        }
     }
     
     public static void excluirInvestidor(){

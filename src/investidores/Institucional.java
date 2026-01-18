@@ -15,5 +15,14 @@ public class Institucional extends Investidor {
     public String getRazao(){
         return this.razao;
     }
+
+    @Override
+    public String toString() {
+        return "Instituicional | " +
+                "Nome: " + nome  +
+                ", CNPJ: " + id +
+                ", Razão Social: " + razao +
+                '.';
+    }
     
 }
