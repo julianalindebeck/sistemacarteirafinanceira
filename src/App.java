@@ -616,12 +616,12 @@ public class App {
     }
     
     public static void cadastrarInvestidor(){
-        System.out.println("*------------* CADASTRAR INVESTIDOR *------------*");
+        System.out.println("\n*------------* CADASTRAR INVESTIDOR *------------*");
         System.out.println("(1) Pessoa Física\n(2) Pessoa Jurídica\n(3) Voltar ao menu anterior");
         
         escolha = leitura.nextLine();
         while(!escolha.equals("1") && !escolha.equals("2") && !escolha.equals("3")){
-            System.out.println("Opção inválida! Escolha (1) para Pessoa Física ou (2) para Pessoa Jurídica.");
+            System.out.println("\nOpção inválida! Escolha (1) para Pessoa Física ou (2) para Pessoa Jurídica.");
             escolha = leitura.nextLine();
         }
         
@@ -637,12 +637,12 @@ public class App {
     }
 
     public static void cadastrarInvestidorLote(){
-        System.out.println("*------------* CADASTRAR INVESTIDOR EM LOTE *------------*");
+        System.out.println("\n*------------* CADASTRAR INVESTIDOR EM LOTE *------------*");
         System.out.println("(1) Pessoa Física\n(2) Pessoa Jurídica\n(3) Voltar ao menu anterior");
         
         escolha = leitura.nextLine();
         while(!escolha.equals("1") && !escolha.equals("2") && !escolha.equals("3")){
-            System.out.println("Opção inválida! Escolha (1) para Pessoa Física ou (2) para Pessoa Jurídica.");
+            System.out.println("\nOpção inválida! Escolha (1) para Pessoa Física ou (2) para Pessoa Jurídica.");
             escolha = leitura.nextLine();
         }
         
@@ -666,8 +666,8 @@ public class App {
     }
 
     public static void selecionarInvestidor(){
-        System.out.println("*------------*\nSELECIONAR INVESTIDOR\n*------------*");
-        System.out.println("Digite o CPF ou CNPJ do Investidor: ");
+        System.out.println("\n*------------* SELECIONAR INVESTIDOR *------------*");
+        System.out.println("\nDigite o CPF ou CNPJ do Investidor: ");
         String id = leitura.nextLine();
         //selecionar investidor pelo id
     }

@@ -17,4 +17,53 @@ public abstract class Investidor {
         this.endereco = endereco;
         this.patrimonio = patrimonio;
     }
+
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+
+    public String getNome(){
+        return this.nome;
+    }
+
+    public void setId(String id){
+        this.id = id;
+    }
+
+    public String getId(){
+        return this.id;
+    }
+
+    public void setTelefone(int tel){
+        this.telefone = tel;
+    }
+
+    public int getTelefone(){
+        return this.telefone;
+    }
+
+    public void setNascimento(String nascimento){
+        this.nascimento = nascimento;
+    }
+
+    public String getNascimento(){
+        return this.nascimento;
+    }
+
+    public void setEndereco(String end){
+        this.endereco = end;
+    }
+
+    public String getEndereco(){
+        return this.endereco;
+    }
+
+    public void setPatrimonio(double patrimonio){
+        this.patrimonio = patrimonio;
+    }
+
+    public double getPatrimonio(){
+        return this.patrimonio;
+    }
+
 }
