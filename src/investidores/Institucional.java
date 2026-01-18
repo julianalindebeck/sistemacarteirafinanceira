@@ -3,8 +3,9 @@ package investidores;
 public class Institucional extends Investidor {
     private String razao;
 
-    public Institucional(String nome, String id, int telefone, String nascimento, String endereco, double patrimonio){
+    public Institucional(String nome, String id, String telefone, String nascimento, String endereco, double patrimonio, String razao){
         super(nome, id, telefone, nascimento, endereco, patrimonio);
+        this.razao = razao;
     }
 
     public void setRazao(String razao){

@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +9,8 @@ import ativos.Acao;
 import ativos.Fii;
 import ativos.Stock;
 import ativos.Tesouro;
+import investidores.Institucional;
+import investidores.PessoaFisica;
 import leituraDeArquivos.Leitor;
 
 public class App {
@@ -19,6 +22,9 @@ public class App {
     static List<Fii> fiis;
     static List<Tesouro> tesouros;
     static List<Stock> stocks;
+
+    static List<PessoaFisica> pessoaFisica = new ArrayList<>();
+    static List<Institucional> institucional = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
         //leitura dos ativos
@@ -217,6 +223,96 @@ public class App {
         exibirFii();
         exibirStock();
         exibirTesouro();
+    }
+
+    public static void cadastrar(){
+        if(!escolha.equals("6")){
+            System.out.println("\nDigite o nome: ");
+            String nome = leitura.nextLine();
+
+            System.out.println("\nDigite o ticker: ");
+            String ticker = leitura.nextLine();
+
+            System.out.println("\nDigite o preço: ");
+            double precoAtual = verificaDouble();
+
+            if(escolha.equals("1")){
+                boolean qualificado = verificaQualificado();
+
+                acoes.add(new Acao(nome, ticker, precoAtual, qualificado));
+            }
+            else if(escolha.equals("2")){
+                boolean qualificado = verificaQualificado();
+
+                System.out.println("\nDigite o algoritmo de consenso: ");
+                String algoritmo = leitura.nextLine();
+
+                BigInteger qtdMax = BigInteger.ZERO;
+
+                while(true){
+                    try{
+                        System.out.println("\nDigite a quantidade máxima: ");
+                        String valor = leitura.nextLine();
+                        qtdMax = new BigInteger(valor);
+                        break;
+                    } catch(NumberFormatException e){
+                        System.out.println("\nEntrada inválida! Digite novamente.");
+                    }
+                }
+                Criptoativo ativoCriptoativo = new Criptoativo(nome, ticker, precoAtual, algoritmo, qtdMax);
+                ativoCriptoativo.setQualificado(qualificado);
+                criptoativos.add(ativoCriptoativo);
+            }
+            else if(escolha.equals("3")){
+                boolean qualificado = verificaQualificado();
+
+                System.out.println("\nDigite o segmento: ");
+                String segmento = leitura.nextLine();
+
+                System.out.println("\nDigite o dividendo: ");
+                double dividendo = verificaDouble();
+
+                System.out.println("\nDigite a taxa de administração: ");
+                double taxaAdm = verificaDouble();
+
+                Fii ativoFii = new Fii(nome, ticker, precoAtual, segmento, dividendo, taxaAdm);
+                ativoFii.setQualificado(qualificado);
+                fiis.add(ativoFii);
+            }
+            else if(escolha.equals("4")){
+                boolean qualificado = verificaQualificado();
+
+                System.out.println("\nDigite a bolsa de negociação: ");
+                String bolsa = leitura.nextLine();
+
+                System.out.println("\nDigite o setor da empresa: ");
+                String setor = leitura.nextLine();
+
+                Stock ativoStock = new Stock(nome, ticker, precoAtual, bolsa, setor);
+                ativoStock.setQualificado(qualificado);
+                stocks.add(ativoStock);
+            }
+            else if(escolha.equals("5")){
+                boolean qualificado = verificaQualificado();
+
+                System.out.println("\nDigite o rendimento: ");
+                String rendimento = leitura.nextLine();
+
+                System.out.println("\nDigite o vencimento: ");
+                String vencimento = leitura.nextLine();
+
+                Tesouro ativoTesouro = new Tesouro(nome, ticker, precoAtual, rendimento, vencimento);
+                ativoTesouro.setQualificado(qualificado);
+                tesouros.add(ativoTesouro);
+            }
+        }
+        else{
+            return;
+        }
+
+        carregar();
+        esperar(500);
+        System.out.println("\nAtivo cadastrado com sucesso!");
     }
 
     public static void exibirAcoes(){
@@ -626,10 +722,10 @@ public class App {
         }
         
         if(escolha.equals("1")){
-            //cadastrarPessoaFisica();
+            cadastroInvestidor();
         }
         else if(escolha.equals("2")){
-            //cadastrarPessoaJuridica();
+            cadastrarInvestidor();
         }
         else{
             return;
@@ -672,97 +768,50 @@ public class App {
         //selecionar investidor pelo id
     }
 
-    //funções de auxílio
-    public static void cadastrar(){
-        if(!escolha.equals("6")){
-            System.out.println("\nDigite o nome: ");
-            String nome = leitura.nextLine();
+    public static void cadastroInvestidor(){
+        System.out.println("\nDigite o nome: ");
+        String nome = leitura.nextLine();
 
-            System.out.println("\nDigite o ticker: ");
-            String ticker = leitura.nextLine();
+        System.out.println("\nDigite o telefone: ");
+        String telefone = leitura.nextLine();
 
-            System.out.println("\nDigite o preço: ");
-            double precoAtual = verificaDouble();
+        System.out.println("\nDigite a data de nascimento: ");
+        String nascimento = leitura.nextLine();
 
-            if(escolha.equals("1")){
-                boolean qualificado = verificaQualificado();
+        System.out.println("\nDigite o endereço: ");
+        String endereco = leitura.nextLine();
 
-                acoes.add(new Acao(nome, ticker, precoAtual, qualificado));
-            }
-            else if(escolha.equals("2")){
-                boolean qualificado = verificaQualificado();
+        System.out.println("\nDigite o patrimônio: ");
+        double patrimonio = verificaDouble();
 
-                System.out.println("\nDigite o algoritmo de consenso: ");
-                String algoritmo = leitura.nextLine();
+        String id;
 
-                BigInteger qtdMax = BigInteger.ZERO;
+        if(escolha.equals("1")){
+            System.out.println("\nDigite o CPF: ");
+            id = leitura.nextLine();
 
-                while(true){
-                    try{
-                        System.out.println("\nDigite a quantidade máxima: ");
-                        String valor = leitura.nextLine();
-                        qtdMax = new BigInteger(valor);
-                        break;
-                    } catch(NumberFormatException e){
-                        System.out.println("\nEntrada inválida! Digite novamente.");
-                    }
-                }
-                Criptoativo ativoCriptoativo = new Criptoativo(nome, ticker, precoAtual, algoritmo, qtdMax);
-                ativoCriptoativo.setQualificado(qualificado);
-                criptoativos.add(ativoCriptoativo);
-            }
-            else if(escolha.equals("3")){
-                boolean qualificado = verificaQualificado();
+            System.out.println("\nDigite o perfil: ");
+            String perfil = leitura.nextLine();
+            //apenas perfis existentes
 
-                System.out.println("\nDigite o segmento: ");
-                String segmento = leitura.nextLine();
-
-                System.out.println("\nDigite o dividendo: ");
-                double dividendo = verificaDouble();
-
-                System.out.println("\nDigite a taxa de administração: ");
-                double taxaAdm = verificaDouble();
-
-                Fii ativoFii = new Fii(nome, ticker, precoAtual, segmento, dividendo, taxaAdm);
-                ativoFii.setQualificado(qualificado);
-                fiis.add(ativoFii);
-            }
-            else if(escolha.equals("4")){
-                boolean qualificado = verificaQualificado();
-
-                System.out.println("\nDigite a bolsa de negociação: ");
-                String bolsa = leitura.nextLine();
-
-                System.out.println("\nDigite o setor da empresa: ");
-                String setor = leitura.nextLine();
-
-                Stock ativoStock = new Stock(nome, ticker, precoAtual, bolsa, setor);
-                ativoStock.setQualificado(qualificado);
-                stocks.add(ativoStock);
-            }
-            else if(escolha.equals("5")){
-                boolean qualificado = verificaQualificado();
-
-                System.out.println("\nDigite o rendimento: ");
-                String rendimento = leitura.nextLine();
-
-                System.out.println("\nDigite o vencimento: ");
-                String vencimento = leitura.nextLine();
-
-                Tesouro ativoTesouro = new Tesouro(nome, ticker, precoAtual, rendimento, vencimento);
-                ativoTesouro.setQualificado(qualificado);
-                tesouros.add(ativoTesouro);
-            }
+            pessoaFisica.add(new PessoaFisica(nome, id, telefone, nascimento, endereco, patrimonio, perfil));
         }
         else{
-            return;
+            System.out.println("\nDigite o CNPJ: ");
+            id = leitura.nextLine();
+
+            System.out.println("\nDigite a razão social: ");
+            String razao = leitura.nextLine();
+
+            institucional.add(new Institucional(nome, id, telefone, nascimento, endereco, patrimonio, razao));
         }
 
         carregar();
         esperar(500);
-        System.out.println("\nAtivo cadastrado com sucesso!");
+        System.out.println("\nInvestidor cadastrado com sucesso!");
     }
 
+    //funções de auxílio
     public static double verificaDouble(){
         while(true){
             try{

@@ -3,13 +3,13 @@ package investidores;
 public abstract class Investidor {
     protected String nome;
     protected String id;
-    protected int telefone; //int?
+    protected String telefone;
     protected String nascimento;
     protected String endereco;
     protected double patrimonio;
     protected Carteira carteira;
 
-    public Investidor(String nome, String id, int telefone, String nascimento, String endereco, double patrimonio){
+    public Investidor(String nome, String id, String telefone, String nascimento, String endereco, double patrimonio){
         this.nome = nome;
         this.id = id;
         this.telefone = telefone;
@@ -34,11 +34,11 @@ public abstract class Investidor {
         return this.id;
     }
 
-    public void setTelefone(int tel){
+    public void setTelefone(String tel){
         this.telefone = tel;
     }
 
-    public int getTelefone(){
+    public String getTelefone(){
         return this.telefone;
     }
 

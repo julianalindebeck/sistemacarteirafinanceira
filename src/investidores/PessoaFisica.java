@@ -3,8 +3,9 @@ package investidores;
 public class PessoaFisica extends Investidor {
     private String perfil;
 
-    public PessoaFisica(String nome, String id, int telefone, String nascimento, String endereco, double patrimonio){
+    public PessoaFisica(String nome, String id, String telefone, String nascimento, String endereco, double patrimonio, String perfil){
         super(nome, id, telefone, nascimento, endereco, patrimonio);
+        this.perfil = perfil;
     }
 
     public void setPerfil(String perfil){
