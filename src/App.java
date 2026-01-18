@@ -9,7 +9,9 @@ import ativos.Acao;
 import ativos.Fii;
 import ativos.Stock;
 import ativos.Tesouro;
+import excecoes.InvalidHeritageException;
 import investidores.Institucional;
+import investidores.Investidor;
 import investidores.PessoaFisica;
 import leituraDeArquivos.Leitor;
 
@@ -25,6 +27,7 @@ public class App {
 
     static List<PessoaFisica> pessoaFisica = new ArrayList<>();
     static List<Institucional> institucional = new ArrayList<>();
+    static List<String> ids = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
         //leitura dos ativos
@@ -686,7 +689,7 @@ public class App {
     public static void menuInvestidor(){
         do{
             System.out.println("\n*------------* MENU INVESTIDOR *------------*");
-            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Selecionar Investidor (por CPF ou CNPJ)\n(6) Voltar ao menu anterior");
+            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Editar Investidor\n(6) Voltar ao menu anterior");
 
             escolha = leitura.nextLine();
         }while(!escolha.equals("1") && !escolha.equals("2") && !escolha.equals("3") && !escolha.equals("4") && !escolha.equals("5") &&!escolha.equals("6"));
@@ -704,11 +707,63 @@ public class App {
             excluirInvestidor();
         }
         else if(escolha.equals("5")){
-            selecionarInvestidor();
+            Investidor inv = selecionarInvestidor();
+
+            if(inv == null){
+                return;
+            }
+
+            if(inv instanceof PessoaFisica){
+                editarPessoaFisica((PessoaFisica) inv);
+            }
+            else if(inv instanceof Institucional){
+                editarInstitucional((Institucional) inv);
+            }
         }
         else{
             return;
         }
+    }
+
+    private static void editarDadosComuns(Investidor inv){
+        carregar();
+        esperar(700);
+        System.out.println("\nInvestidor encontrado!");
+
+        System.out.println("\nDigite o novo nome: ");
+        inv.setNome(leitura.nextLine());
+
+        System.out.println("\nDigite o novo telefone: ");
+        inv.setTelefone(leitura.nextLine());
+
+        System.out.println("\nDigite a nova data de nascimento: ");
+        inv.setNascimento(leitura.nextLine());
+
+        System.out.println("\nDigite o novo endereço: ");
+        inv.setEndereco(leitura.nextLine());
+
+        System.out.println("\nDigite o novo patrimônio: ");
+        inv.setPatrimonio(verificaDouble());
+    }
+
+    public static void editarPessoaFisica(PessoaFisica p){
+        editarDadosComuns(p);
+        System.out.println("\nDigite o novo perfil: ");
+        p.setPerfil(leitura.nextLine());
+
+        carregar();
+        esperar(700);
+        System.out.println("\nPessoa Física atualizada com sucesso!");
+    }
+
+    public static void editarInstitucional(Institucional i){
+        editarDadosComuns(i);
+        System.out.println("\nDigite a nova razão social: ");
+        i.setRazao(leitura.nextLine());
+
+        carregar();
+        esperar(700);
+        System.out.println("\nInstitucional atualizado com sucesso!");
     }
     
     public static void cadastrarInvestidor(){
@@ -759,24 +814,74 @@ public class App {
     }
     
     public static void exibirInvestidores(){
+        exibirPessoaFisica();
+        exibirInstitucional();
+    }
+
+    public static void exibirPessoaFisica(){
         for(PessoaFisica p : pessoaFisica){
             System.out.println(p);
         }
+    }
 
+    public static void exibirInstitucional(){
         for(Institucional i : institucional){
             System.out.println(i);
         }
     }
     
     public static void excluirInvestidor(){
-        //excluir investidores
+        atualizaIDs();
+        //completar
     }
 
-    public static void selecionarInvestidor(){
+    public static void atualizaIDs(){
+        for(PessoaFisica p : pessoaFisica){
+            ids.add(p.getId());
+        }
+        for(Institucional i : institucional){
+            ids.add(i.getId());
+        }
+    }
+
+    public static Investidor selecionarInvestidor(){
         System.out.println("\n*------------* SELECIONAR INVESTIDOR *------------*");
-        System.out.println("\nDigite o CPF ou CNPJ do Investidor: ");
-        String id = leitura.nextLine();
-        //selecionar investidor pelo id
+        do{
+            System.out.println("(1) Pessoa Física \n(2) Institucional");
+            escolha = leitura.nextLine();
+        }while(!escolha.equals("1") && !escolha.equals("2"));
+        if(escolha.equals("1")){
+            exibirPessoaFisica();
+            System.out.println("\nDigite o CPF do Investidor: ");
+            escolha = leitura.nextLine();
+            return selecionarCPF();
+        }
+        else{
+            exibirInstitucional();
+            System.out.println("\nDigite o CNPJ do Investidor: ");
+            escolha = leitura.nextLine();
+            return selecionarCNPJ();
+        }
+    }
+
+    public static PessoaFisica selecionarCPF() {
+        for(PessoaFisica p : pessoaFisica){
+            if(escolha.equals(p.getId())){
+                return p;
+            }
+        }
+        System.out.println("\nCPF não encontrado!");
+        return null;
+    }
+
+    public static Institucional selecionarCNPJ() {
+        for(Institucional i : institucional){
+            if(escolha.equals(i.getId())){
+                return i;
+            }
+        }
+        System.out.println("\nCNPJ não encontrado!");
+        return null;
     }
 
     public static void cadastroInvestidor(){
@@ -793,7 +898,7 @@ public class App {
         String endereco = leitura.nextLine();
 
         System.out.println("\nDigite o patrimônio: ");
-        double patrimonio = verificaDouble();
+        double patrimonio = lerPatrimonio();
 
         String id;
 
@@ -822,6 +927,21 @@ public class App {
         System.out.println("\nInvestidor cadastrado com sucesso!");
     }
 
+    public static double lerPatrimonio() {
+        while (true) {
+            try {
+                double valor = verificaDouble();
+                if (valor < 0) {
+                    throw new InvalidHeritageException();
+                }
+                return valor;
+            } catch (InvalidHeritageException e) {
+                System.out.println(e.getMessage());
+                System.out.print("Digite o patrimônio novamente:\n");
+            }
+        }
+    }
+    
     //funções de auxílio
     public static double verificaDouble(){
         while(true){

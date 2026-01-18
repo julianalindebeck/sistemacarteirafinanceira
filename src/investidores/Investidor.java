@@ -1,5 +1,7 @@
 package investidores;
 
+import excecoes.InvalidHeritageException;
+
 public abstract class Investidor {
     protected String nome;
     protected String id;
@@ -59,6 +61,9 @@ public abstract class Investidor {
     }
 
     public void setPatrimonio(double patrimonio){
+        if(patrimonio < 0){
+            throw new InvalidHeritageException();
+        }
         this.patrimonio = patrimonio;
     }
 

@@ -12,7 +12,7 @@ public abstract class Ativos {
 
     public Ativos(String nome, String ticker, double precoAtual){
         this.nome = nome;
-        this.ticker = ticker;
+        setTicker(ticker);
         this.precoAtual = precoAtual;
         this.qualificado = false;
     }
