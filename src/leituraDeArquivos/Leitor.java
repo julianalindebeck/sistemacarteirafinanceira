@@ -11,6 +11,8 @@ import ativos.Criptoativo;
 import ativos.Fii;
 import ativos.Stock;
 import ativos.Tesouro;
+import investidores.Institucional;
+import investidores.PessoaFisica;
 
 public class Leitor {
     public static List<String[]> lerCSV(String caminho){
@@ -33,6 +35,7 @@ public class Leitor {
         return linhas;
     }
 
+    //leitura dos ativos
     public static List<Acao> listaAcao(String caminho){
         List<Acao> lista = new ArrayList<>();
 
@@ -137,6 +140,44 @@ public class Leitor {
         return lista;
     }
 
+    //leitura dos investidores
+    public static List<PessoaFisica> listaPessoaFisica(String caminho){
+        List<PessoaFisica> lista = new ArrayList<>();
+
+        for (String[] c : lerCSV(caminho)){
+            String nome = c[0];
+            String id = c[1];
+            String telefone = c[2];
+            String nascimento = c[3];
+            String endereco = c[4];
+            double patrimonio = converteDouble(c[5]);
+            String perfil = c[6];
+
+            lista.add(new PessoaFisica(nome, id, telefone, nascimento, endereco, patrimonio, perfil));
+        }
+
+        return lista;
+    }
+
+    public static List<Institucional> listaInstitucional(String caminho){
+        List<Institucional> lista = new ArrayList<>();
+
+        for (String[] c : lerCSV(caminho)){
+            String nome = c[0];
+            String id = c[1];
+            String telefone = c[2];
+            String nascimento = c[3];
+            String endereco = c[4];
+            double patrimonio = converteDouble(c[5]);
+            String razao = c[6];
+
+            lista.add(new Institucional(nome, id, telefone, nascimento, endereco, patrimonio, razao));
+        }
+
+        return lista;
+    }
+
+    //função para auxílio
     private static double converteDouble(String val){
         try{
             val = val.replace(".", "").replace(",", ".");
@@ -146,5 +187,4 @@ public class Leitor {
             return 0.0;
         }
     } 
-
 }

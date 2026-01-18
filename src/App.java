@@ -345,7 +345,7 @@ public class App {
         }
     }
 
-    private static Acao buscarAcao(String ticker) {
+    private static Acao buscarAcao(String ticker){
         for(Acao a : acoes){
             if(a.getTicker().equalsIgnoreCase(ticker)){
                 return a;
@@ -354,7 +354,7 @@ public class App {
         return null;
     }
 
-    private static Criptoativo buscarCriptoativo(String ticker) {
+    private static Criptoativo buscarCriptoativo(String ticker){
         for(Criptoativo c : criptoativos){
             if(c.getTicker().equalsIgnoreCase(ticker)){
                 return c;
@@ -363,7 +363,7 @@ public class App {
         return null;
     }
 
-    private static Fii buscarFii(String ticker) {
+    private static Fii buscarFii(String ticker){
         for(Fii f : fiis){
             if(f.getTicker().equalsIgnoreCase(ticker)){
                 return f;
@@ -372,7 +372,7 @@ public class App {
         return null;
     }
 
-    private static Stock buscarStock(String ticker) {
+    private static Stock buscarStock(String ticker){
         for(Stock s : stocks){
             if(s.getTicker().equalsIgnoreCase(ticker)){
                 return s;
@@ -381,7 +381,7 @@ public class App {
         return null;
     }
 
-    private static Tesouro buscarTesouro(String ticker) {
+    private static Tesouro buscarTesouro(String ticker){
         for(Tesouro t : tesouros){
             if(t.getTicker().equalsIgnoreCase(ticker)){
                 return t;
@@ -390,7 +390,7 @@ public class App {
         return null;
     }
 
-    private static void editarAcao() {
+    private static void editarAcao(){
         System.out.print("\nDigite o ticker da Ação que deseja alterar: ");
         String ticker = leitura.nextLine();
 
@@ -418,7 +418,7 @@ public class App {
         System.out.println("\nAção atualizada com sucesso!");
     }
 
-    private static void editarCriptoativo() {
+    private static void editarCriptoativo(){
         System.out.print("\nDigite o ticker do Criptoativo que deseja alterar: ");
         String ticker = leitura.nextLine();
 
@@ -567,7 +567,7 @@ public class App {
         System.out.println("\nTesouro atualizado com sucesso!");
     }
     
-    private static void excluirAcao() {
+    private static void excluirAcao(){
         exibirAcoes();
 
         System.out.print("\nDigite o ticker da ação que deseja excluir: ");
@@ -590,7 +590,7 @@ public class App {
         System.out.println("\nAção excluída com sucesso!");
     }
 
-    private static void excluirCriptoativo() {
+    private static void excluirCriptoativo(){
         exibirCriptoativos();
 
         System.out.print("\nDigite o ticker do Criptoativo que deseja excluir: ");
@@ -613,7 +613,7 @@ public class App {
         System.out.println("\nCriptoativo excluído com sucesso!");
     }
     
-    private static void excluirFii() {
+    private static void excluirFii(){
         exibirFii();
 
         System.out.print("\nDigite o ticker do Fundo de Investimento Imobiliário que deseja excluir: ");
@@ -636,7 +636,7 @@ public class App {
         System.out.println("\nFII excluído com sucesso!");
     }
 
-    private static void excluirStock() {
+    private static void excluirStock(){
         exibirStock();
 
         System.out.print("\nDigite o ticker do Stock que deseja excluir: ");
@@ -659,7 +659,7 @@ public class App {
         System.out.println("\nStock excluído com sucesso!");
     }
 
-    private static void excluirTesouro() {
+    private static void excluirTesouro(){
         exibirTesouro();
 
         System.out.print("\nDigite o ticker do Tesouro que deseja excluir: ");
@@ -741,12 +741,17 @@ public class App {
             System.out.println("\nOpção inválida! Escolha (1) para Pessoa Física ou (2) para Pessoa Jurídica.");
             escolha = leitura.nextLine();
         }
+
+        System.out.println("\nInforme o caminho do arquivo: ");
+        String caminho = leitura.nextLine();
         
         if(escolha.equals("1")){
-            //cadastrarPessoaFisicaLote();
+            List<PessoaFisica> pessoaFisicaLote = Leitor.listaPessoaFisica(caminho);
+            pessoaFisica.addAll(pessoaFisicaLote);
         }
         else if(escolha.equals("2")){
-            //cadastrarPessoaJuridicaLote();
+            List<Institucional> institucionalLote = Leitor.listaInstitucional(caminho);
+            institucional.addAll(institucionalLote);
         }
         else{
             return;

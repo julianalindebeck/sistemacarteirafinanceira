@@ -16,4 +16,13 @@ public class PessoaFisica extends Investidor {
         return this.perfil;
     }
 
+    @Override
+    public String toString() {
+        return "Pessoa Física | " +
+                "Nome: " + nome  +
+                ", CPF: " + id +
+                ", Perfil: " + perfil +
+                '.';
+    }
+
 }
