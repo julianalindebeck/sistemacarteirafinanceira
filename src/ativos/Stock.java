@@ -29,12 +29,12 @@ public class Stock extends AtivosInternacionais {
 
     @Override
     public String toString() {
-        return "Stock | " +
-                "Nome: " + nome  +
-                ", Ticker: " + ticker +
-                ", Preço: " + precoAtual +
-                ", Bolsa: " + bolsa +
-                ", Setor: " + setor +
-                '.';
+        return "Nome: " + nome  +
+               ", ticker: " + ticker +
+               ", preço: " + precoAtual +
+               ", bolsa de negociação: " + bolsa +
+               ", setor da empresa: " + setor +
+               ", qualificado: " + qualificado +
+               '.';
     }
 }

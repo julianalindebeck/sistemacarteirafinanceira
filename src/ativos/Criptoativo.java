@@ -31,13 +31,13 @@ public class Criptoativo extends AtivosInternacionais {
 
     @Override
     public String toString() {
-        return "Criptoativo | " +
-                "Nome: " + nome  +
-                ", Ticker: " + ticker +
-                ", Preço: " + precoAtual +
-                ", Algoritmo: " + algoritmo +
-                ", Quantidade Máxima: " + qtdMax +
-                '.';
+        return "Nome: " + nome  +
+               ", ticker: " + ticker +
+               ", preço: " + precoAtual +
+               ", algoritmo: " + algoritmo +
+               ", quantidade máxima: " + qtdMax +
+               ", qualificado: " + qualificado +
+               '.';
     }
     
 }

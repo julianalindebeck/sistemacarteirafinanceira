@@ -29,12 +29,12 @@ public class Tesouro extends AtivosNacionais {
 
     @Override
     public String toString() {
-        return "Tesouro | " +
-                "Nome: " + nome  +
-                ", Ticker: " + ticker +
-                ", Preço: " + precoAtual +
-                ", Rendimento: " + rendimento +
-                ", Vencimento: " + vencimento +
-                '.';
+        return "Nome: " + nome  +
+               ", ticker: " + ticker +
+               ", preço: " + precoAtual +
+               ", rendimento: " + rendimento +
+               ", vencimento: " + vencimento +
+               ", qualificado: " + qualificado +
+               '.';
     }
 }

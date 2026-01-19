@@ -19,12 +19,11 @@ public class Acao extends AtivosNacionais {
 
     @Override
     public String toString() {
-        return "Ação | " +
-                "Nome: " + nome  +
-                ", Ticker: " + ticker +
-                ", Preço: " + precoAtual +
-                ", Qualificado: " + qualificado +
-                '.';
+        return "Nome: " + nome  +
+               ", ticker: " + ticker +
+               ", preço: " + precoAtual +
+               ", qualificado: " + qualificado +
+               '.';
     }
     
 }

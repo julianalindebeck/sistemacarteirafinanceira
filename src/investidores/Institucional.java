@@ -18,10 +18,10 @@ public class Institucional extends Investidor {
 
     @Override
     public String toString() {
-        return "Instituicional | " +
-                "Nome: " + nome  +
+        return "Nome: " + nome  +
                 ", CNPJ: " + id +
-                ", Razão Social: " + razao +
+                ", razão social: " + razao +
+                ", patrimônio: " + patrimonio +
                 '.';
     }
     

@@ -44,13 +44,13 @@ public class Fii extends AtivosNacionais {
 
     @Override
     public String toString() {
-        return "FII | " +
-                "Nome: " + nome  +
-                ", Ticker: " + ticker +
-                ", Preço: " + precoAtual +
-                ", Segmento: " + segmento +
-                ", Dividendo: " + dividendo +
-                ", Taxa: " + taxaAdm +
-                '.';
+        return "Nome: " + nome  +
+               ", ticker: " + ticker +
+               ", preço: " + precoAtual +
+               ", segmentp: " + segmento +
+               ", dividendo: " + dividendo +
+               ", taxa de administração: " + taxaAdm +
+               ", qualificado: " + qualificado +
+               '.';
     }
 }

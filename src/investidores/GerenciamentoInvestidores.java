@@ -28,10 +28,10 @@ public class GerenciamentoInvestidores {
     public void menuInvestidor(){
         do{
             System.out.println("\n*------------* MENU INVESTIDOR *------------*");
-            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Editar Investidor\n(6) Voltar ao menu inicial");
+            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Editar Investidor\n(6) Visualizar Ativos e outras opções\n(7) Voltar ao menu inicial");
 
             escolha = leitura.nextLine();
-        } while(!escolha.matches("[1-6]"));
+        } while(!escolha.matches("[1-7]"));
         
         switch(escolha){
             case "1":
@@ -62,6 +62,9 @@ public class GerenciamentoInvestidores {
                 break;
             }
             case "6":
+                opçoesAtivos();
+                break;
+            case "7":
                 return;
         }
     }
@@ -162,12 +165,26 @@ public class GerenciamentoInvestidores {
     }
 
     private void exibirPessoaFisica(){
+        System.out.println("\n*-----* PESSOAS FÍSICAS *-----*");
+
+        if(pessoaFisica.isEmpty()){
+            System.out.println("Nenhum Investidor do tipo (Pessoa Física) cadastrado.");
+            return;
+        }
+
         for(PessoaFisica p : pessoaFisica){
             System.out.println(p);
         }
     }
 
     private void exibirInstitucional(){
+        System.out.println("\n*-----* INSTITUIÇÕES *-----*");
+
+        if(institucional.isEmpty()){
+            System.out.println("Nenhum Investidor do tipo (Institucional) cadastrado.");
+            return;
+        }
+
         for(Institucional i : institucional){
             System.out.println(i);
         }
@@ -231,6 +248,39 @@ public class GerenciamentoInvestidores {
         carregar();
         esperar(700);
         System.out.println("\nInstitucional atualizado com sucesso!");
+    }
+
+    //ativos
+    private void opçoesAtivos(){
+        do{
+            System.out.println("\n*------------* ATIVOS *------------*");
+            System.out.println("(1) Exibir Ativos\n(2) Exibir valor total gasto\n(3) Exibir valor total atual\n(4) Exibir porcentagem de produtos de renda fixa e variável\n(5) Exibir porcentagem de produtos internacionais e nacionais\n(6) Salvar relatório\n(7) Voltar ao menu inicial");
+
+            escolha = leitura.nextLine();
+        } while(!escolha.matches("[1-7]"));
+
+        switch(escolha){
+            case "1":
+                //exibirAtivos();
+                break;
+            case "2":
+                //exibirValorTotalGasto();
+                break;
+            case "3":
+                //exibirValorTotalAtual();
+                break;
+            case "4":
+                //exibirPorcentagemRenda();
+                break;
+            case "5":
+                //exibirPorcentagemIntNac();
+                break;
+            case "6":
+                //salvarRelatorio();
+                break;
+            case "7":
+                return;
+        }
     }
 
     //selecionar investidores

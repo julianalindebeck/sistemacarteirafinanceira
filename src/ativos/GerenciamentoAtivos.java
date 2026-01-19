@@ -34,7 +34,7 @@ public class GerenciamentoAtivos {
     public void menuAtivo(){
         do{
             System.out.println("\n*------------* MENU ATIVO *------------*");
-            System.out.println("(1) Cadastrar Ativo\n(2) Cadastrar Ativo em lote\n(3) Editar Ativo\n(4) Excluir Ativo\n(5) Exibir relatório\n(6) Voltar ao menu anterior");
+            System.out.println("(1) Cadastrar Ativo\n(2) Cadastrar Ativo em lote\n(3) Editar Ativo\n(4) Excluir Ativo\n(5) Exibir relatório\n(6) Voltar ao menu inicial");
 
             escolha = leitura.nextLine();
         } while(!escolha.matches("[1-6]"));
@@ -63,7 +63,7 @@ public class GerenciamentoAtivos {
     //cadastrar ativos
     private void cadastrarAtivo(){
         do{
-            System.out.println("\nEscolha o tipo de ativo a ser cadastrado:\n(1) Ação\n(2) Criptoativo\n(3) Fundo de Investimento Imobiliário\n(4) Stock\n(5) Tesouro\n(6) Voltar ao menu anterior");
+            System.out.println("\nEscolha o tipo de ativo a ser cadastrado:\n(1) Ação\n(2) Criptoativo\n(3) Fundo de Investimento Imobiliário\n(4) Stock\n(5) Tesouro\n(6) Voltar ao menu inicial");
             escolha = leitura.nextLine();
         } while(!escolha.matches("[1-6]"));
 
@@ -72,7 +72,7 @@ public class GerenciamentoAtivos {
     
     private void cadastrarAtivoLote(){
         do{
-            System.out.println("\nEscolha o tipo de ativo a ser cadastrado em lote:\n(1) Ação\n(2) Criptoativo\n(3) Fundo de Investimento Imobiliário\n(4) Stock\n(5) Tesouro\n(6) Voltar ao menu anterior");
+            System.out.println("\nEscolha o tipo de ativo a ser cadastrado em lote:\n(1) Ação\n(2) Criptoativo\n(3) Fundo de Investimento Imobiliário\n(4) Stock\n(5) Tesouro\n(6) Voltar ao menu inicial");
             escolha = leitura.nextLine();
         } while(!escolha.matches("[1-6]"));
 
@@ -237,7 +237,7 @@ public class GerenciamentoAtivos {
     }
 
     private void editarAcao(){
-        System.out.print("\nDigite o ticker da Ação que deseja alterar: ");
+        System.out.println("\nDigite o ticker da Ação que deseja alterar: ");
         String ticker = leitura.nextLine();
 
         Acao a = buscarAcao(ticker);
@@ -265,7 +265,7 @@ public class GerenciamentoAtivos {
     }
 
     private void editarCriptoativo(){
-        System.out.print("\nDigite o ticker do Criptoativo que deseja alterar: ");
+        System.out.println("\nDigite o ticker do Criptoativo que deseja alterar: ");
         String ticker = leitura.nextLine();
 
         Criptoativo c = buscarCriptoativo(ticker);
@@ -310,7 +310,7 @@ public class GerenciamentoAtivos {
     }
     
     private void editarFii(){
-        System.out.print("Digite o ticker do Fundo de Investimento Imobiliário que deseja alterar: ");
+        System.out.println("Digite o ticker do Fundo de Investimento Imobiliário que deseja alterar: ");
         String ticker = leitura.nextLine();
         Fii f = buscarFii(ticker);
         
@@ -346,7 +346,7 @@ public class GerenciamentoAtivos {
     }
     
     private void editarStock(){
-        System.out.print("\nDigite o ticker do Stock que deseja alterar: ");
+        System.out.println("\nDigite o ticker do Stock que deseja alterar: ");
         String ticker = leitura.nextLine();
 
         Stock s = buscarStock(ticker);
@@ -380,7 +380,7 @@ public class GerenciamentoAtivos {
     }
     
     private void editarTesouro(){
-        System.out.print("\nDigite o ticker do Tesouro que deseja alterar: ");
+        System.out.println("\nDigite o ticker do Tesouro que deseja alterar: ");
         String ticker = leitura.nextLine();
 
         Tesouro t = buscarTesouro(ticker);
@@ -557,7 +557,7 @@ public class GerenciamentoAtivos {
     //exibir relatórios
     private void exibirRelatorioAtivo(){
         do{
-            System.out.println("Escolha o ativo que deseja exibir o relatório:\n(1) Todos os Ativos \n(2) Ação\n(3) Criptoativo\n(4) Fundo de Investimento Imobiliário\n(5) Stock\n(6) Tesouro");
+            System.out.println("\nEscolha o ativo que deseja exibir o relatório:\n(1) Todos os Ativos \n(2) Ação\n(3) Criptoativo\n(4) Fundo de Investimento Imobiliário\n(5) Stock\n(6) Tesouro");
             escolha = leitura.nextLine();
         } while(!escolha.matches("[1-6]"));
 
@@ -592,30 +592,35 @@ public class GerenciamentoAtivos {
     }
 
     private void exibirAcoes(){
+        System.out.println("\n*-----* AÇÕES *-----*");
         for(Acao a : acoes){
             System.out.println(a);
         }
     }
 
     private void exibirCriptoativos(){
+        System.out.println("\n*-----* CRIPTOATIVOS *-----*");
         for(Criptoativo c : criptoativos){
             System.out.println(c);
         }
     }
 
     private void exibirFii(){
+        System.out.println("\n*-----* FUNDO DE INVESTIMENTO IMOBILIÁRIO *-----*");
         for(Fii f : fiis){
             System.out.println(f);
         }
     }
 
     private void exibirStock(){
+        System.out.println("\n*-----* STOCKS *-----*");
         for(Stock s : stocks){
             System.out.println(s);
         }
     }
 
     private void exibirTesouro(){
+        System.out.println("\n*-----* TESOUROS *-----*");
         for(Tesouro t : tesouros){
             System.out.println(t);
         }

@@ -18,11 +18,11 @@ public class PessoaFisica extends Investidor {
 
     @Override
     public String toString() {
-        return "Pessoa Física | " +
-                "Nome: " + nome  +
-                ", CPF: " + id +
-                ", Perfil: " + perfil +
-                '.';
+        return "Nome: " + nome  +
+               ", CPF: " + id +
+               ", perfil: " + perfil +
+               ", patrimônio: " + patrimonio +
+               '.';
     }
 
 }
