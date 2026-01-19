@@ -16,9 +16,41 @@ public class Carteira {
     private double internacionais = 0;
     private double nacionais = 0;
 
-    public Carteira(List<Ativos> ativos, double quantidade){
-        this.ativos = ativos;
-        this.quantidade = quantidade;
+    public Carteira(){
+        this.ativos = new ArrayList<>();
+    }
+
+    public void adicionarAtivo(Ativos novoAtivo){
+        for(Ativos a : ativos){
+            if(a.getTicker().equalsIgnoreCase(novoAtivo.getTicker())){
+                a.setQtd(a.getQtd() + novoAtivo.getQtd());
+                return;
+            }
+        }
+        ativos.add(novoAtivo);
+    } 
+    
+    public void removerAtivo(String ticker, double quantidade){
+        for(Ativos a : ativos){
+            if(a.getTicker().equalsIgnoreCase(ticker)){
+
+                if(a.getQtd() < quantidade){
+                    throw new IllegalArgumentException("Quantidade insuficiente para venda.");
+                }
+
+                a.setQtd(a.getQtd() - quantidade);
+
+                if(a.getQtd() == 0){
+                    ativos.remove(a);
+                }
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Ativo não encontrado na carteira.");
+    }
+
+    public List<Ativos> getAtivos(){
+        return ativos;
     }
 
     public double getQuantidade(){

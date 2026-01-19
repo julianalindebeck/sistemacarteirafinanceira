@@ -9,6 +9,7 @@ public abstract class Ativos {
     protected double precoAtual;
     protected boolean qualificado;
     protected boolean rendaVariavel;
+    protected double qtd;
 
     public Ativos(String nome, String ticker, double precoAtual){
         this.nome = nome;
@@ -23,6 +24,14 @@ public abstract class Ativos {
 
     public String getNome(){
         return nome;
+    }
+
+    public void setQtd(double qtd){
+        this.qtd = qtd;
+    }
+
+    public double getQtd(){
+        return qtd;
     }
 
     public void setTicker(String ticker){

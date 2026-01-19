@@ -1,5 +1,6 @@
 package investidores;
 
+import ativos.Ativos;
 import excecoes.InvalidHeritageException;
 
 public abstract class Investidor {
@@ -18,13 +19,43 @@ public abstract class Investidor {
         this.telefone = telefone;
         this.nascimento = nascimento;
         this.endereco = endereco;
+
         this.patrimonio = patrimonio;
-        if(patrimonio>=1000000){
+        if(patrimonio >= 1000000){
             this.qualificado=true;
         }
         else{
             this.qualificado=false;
         }
+        
+        this.carteira = new Carteira();
+    }
+
+    public void comprarAtivo(Ativos ativo, double quantidade){
+        ativo.setQtd(quantidade);
+
+        double custo = ativo.getPrecoAtual() * quantidade;
+
+        if(custo > patrimonio){
+            throw new IllegalArgumentException("Patrimônio insuficiente para compra.");
+        }
+
+        carteira.adicionarAtivo(ativo);
+        patrimonio -= custo;
+    }
+
+    public void venderAtivo(String ticker, double quantidade){
+        carteira.removerAtivo(ticker, quantidade);
+
+        double preco = 0;
+        for(Ativos a : carteira.getAtivos()){
+            if(a.getTicker().equalsIgnoreCase(ticker)){
+                preco = a.getPrecoAtual();
+                break;
+            }
+        }
+        
+        patrimonio += preco * quantidade;
     }
 
     public void setNome(String nome){

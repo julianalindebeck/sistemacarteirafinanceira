@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+import ativos.Ativos;
 import excecoes.InvalidHeritageException;
 import leituraDeArquivos.Leitor;
-import movimentacao.Movimentacao;
 
 public class GerenciamentoInvestidores {
     private Scanner leitura;
@@ -66,7 +67,7 @@ public class GerenciamentoInvestidores {
                 opçoesAtivos();
                 break;
             case "7":
-                Movimentacao.realizarMovimentação();
+                realizarMovimentacao();
                 break;
             case "8":
                 return;
@@ -329,6 +330,46 @@ public class GerenciamentoInvestidores {
 
         System.out.println("\nCNPJ não encontrado!");
         return null;
+    }
+
+    //realizar movimentação
+    private void realizarMovimentacao(){
+        Investidor investidor = selecionarInvestidor();
+        if (investidor == null) return;
+
+        do{
+            System.out.println("\n(1) Comprar ativo\n(2) Vender ativo\n(3) Voltar para o menu inicial");
+            escolha = leitura.nextLine();
+        } while(!escolha.matches("[1-3]"));
+
+        if(escolha.equals("3")){
+            return;
+        }
+
+        System.out.println("\nDigite o ticker do ativo:");
+        String ticker = leitura.nextLine();
+
+        System.out.println("\nDigite a quantidade:");
+        double quantidade = verificaDouble();
+
+        try{
+            if(escolha.equals("1")){
+                Ativos ativo = buscarAtivoGlobal(ticker);
+                if(ativo == null){
+                    System.out.println("\nAtivo não encontrado.");
+                    return;
+                }
+
+                investidor.comprarAtivo(ativo, quantidade);
+                System.out.println("\nCompra realizada com sucesso!");
+            } 
+            else{
+                investidor.venderAtivo(ticker, quantidade);
+                System.out.println("\nVenda realizada com sucesso!");
+            }
+        } catch(Exception e){
+            System.out.println("\nErro: " + e.getMessage());
+        }
     }
 
     //funções de auxílio
