@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import excecoes.InvalidHeritageException;
 import leituraDeArquivos.Leitor;
+import movimentacao.Movimentacao;
 
 public class GerenciamentoInvestidores {
     private Scanner leitura;
@@ -28,10 +29,10 @@ public class GerenciamentoInvestidores {
     public void menuInvestidor(){
         do{
             System.out.println("\n*------------* MENU INVESTIDOR *------------*");
-            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Editar Investidor\n(6) Visualizar Ativos e outras opções\n(7) Voltar ao menu inicial");
+            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Editar Investidor\n(6) Visualizar Ativos e outras opções\n(7) Realizar movimentação\n(8) Voltar ao menu inicial");
 
             escolha = leitura.nextLine();
-        } while(!escolha.matches("[1-7]"));
+        } while(!escolha.matches("[1-8]"));
         
         switch(escolha){
             case "1":
@@ -65,6 +66,9 @@ public class GerenciamentoInvestidores {
                 opçoesAtivos();
                 break;
             case "7":
+                Movimentacao.realizarMovimentação();
+                break;
+            case "8":
                 return;
         }
     }

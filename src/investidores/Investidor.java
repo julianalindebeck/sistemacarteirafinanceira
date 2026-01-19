@@ -10,6 +10,7 @@ public abstract class Investidor {
     protected String endereco;
     protected double patrimonio;
     protected Carteira carteira;
+    protected boolean qualificado;
 
     public Investidor(String nome, String id, String telefone, String nascimento, String endereco, double patrimonio){
         this.nome = nome;
@@ -18,6 +19,12 @@ public abstract class Investidor {
         this.nascimento = nascimento;
         this.endereco = endereco;
         this.patrimonio = patrimonio;
+        if(patrimonio>=1000000){
+            this.qualificado=true;
+        }
+        else{
+            this.qualificado=false;
+        }
     }
 
     public void setNome(String nome){
