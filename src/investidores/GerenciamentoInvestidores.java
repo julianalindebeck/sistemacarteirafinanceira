@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import ativos.Ativos;
+import ativos.GerenciamentoAtivos;
 import excecoes.InvalidHeritageException;
 import leituraDeArquivos.Leitor;
 
@@ -16,15 +17,18 @@ public class GerenciamentoInvestidores {
     private List<PessoaFisica> pessoaFisica;
     private List<Institucional> institucional;
     private List<String> ids = new ArrayList<>();
+    private GerenciamentoAtivos gerenciamentoAtivos;
 
     public GerenciamentoInvestidores(
         Scanner leitura,
         List<PessoaFisica> pessoaFisica,
-        List<Institucional> institucional
+        List<Institucional> institucional, 
+        GerenciamentoAtivos gerenciamentoAtivos
     ){
         this.leitura = leitura;
         this.pessoaFisica = pessoaFisica;
         this.institucional = institucional;
+        this.gerenciamentoAtivos = gerenciamentoAtivos;
     }
 
     public void menuInvestidor(){
@@ -335,7 +339,9 @@ public class GerenciamentoInvestidores {
     //realizar movimentação
     private void realizarMovimentacao(){
         Investidor investidor = selecionarInvestidor();
-        if (investidor == null) return;
+        if (investidor == null){
+            return;
+        }
 
         do{
             System.out.println("\n(1) Comprar ativo\n(2) Vender ativo\n(3) Voltar para o menu inicial");
@@ -354,18 +360,22 @@ public class GerenciamentoInvestidores {
 
         try{
             if(escolha.equals("1")){
-                Ativos ativo = buscarAtivoGlobal(ticker);
+                Ativos ativo = gerenciamentoAtivos.buscarAtivos(ticker);
                 if(ativo == null){
                     System.out.println("\nAtivo não encontrado.");
                     return;
                 }
 
-                investidor.comprarAtivo(ativo, quantidade);
+                Ativos ativoCompra = ativo.clonar();
+
+                investidor.comprarAtivo(ativoCompra, quantidade);
                 System.out.println("\nCompra realizada com sucesso!");
+                investidor.getCarteira().imprimirCarteira();
             } 
             else{
                 investidor.venderAtivo(ticker, quantidade);
                 System.out.println("\nVenda realizada com sucesso!");
+                investidor.getCarteira().imprimirCarteira();
             }
         } catch(Exception e){
             System.out.println("\nErro: " + e.getMessage());

@@ -23,7 +23,7 @@ public class App {
         List<PessoaFisica> pessoaFisica = new ArrayList<>();
         List<Institucional> institucional = new ArrayList<>();
 
-        GerenciamentoInvestidores gerenciamentoInvestidores = new GerenciamentoInvestidores(leitura, pessoaFisica, institucional);
+        GerenciamentoInvestidores gerenciamentoInvestidores = new GerenciamentoInvestidores(leitura, pessoaFisica, institucional, gerenciamentoAtivos);
 
         //menu inicial
         boolean verifica = true;

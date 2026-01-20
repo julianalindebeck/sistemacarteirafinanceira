@@ -18,6 +18,15 @@ public abstract class Ativos {
         this.qualificado = false;
     }
 
+    public Ativos clonar() {
+        return new Ativos(
+            this.nome,
+            this.ticker,
+            this.precoAtual
+        ) {
+        };
+    }
+    
     public void setNome(String nome){
         this.nome = nome;
     }

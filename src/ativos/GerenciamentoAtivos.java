@@ -672,6 +672,35 @@ public class GerenciamentoAtivos {
         return null;
     }
 
+    public Ativos buscarAtivos(String ticker){
+        Ativos ativo;
+
+        ativo = buscarAcao(ticker);
+        if(ativo != null){
+            return ativo;
+        }
+        ativo = buscarCriptoativo(ticker);
+        if(ativo != null){
+            return ativo;
+        }
+
+        ativo = buscarFii(ticker);
+        if(ativo != null){
+            return ativo;
+        }
+
+        ativo = buscarStock(ticker);
+        if(ativo != null){
+            return ativo;
+        }
+
+        ativo = buscarTesouro(ticker);
+        if(ativo != null){
+            return ativo;
+        }
+        return null;
+    }
+
     //funções de auxílio
     private double verificaDouble(){
         while(true){

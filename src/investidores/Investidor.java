@@ -58,6 +58,10 @@ public abstract class Investidor {
         patrimonio += preco * quantidade;
     }
 
+    public Carteira getCarteira() {
+        return carteira;
+    }
+
     public void setNome(String nome){
         this.nome = nome;
     }

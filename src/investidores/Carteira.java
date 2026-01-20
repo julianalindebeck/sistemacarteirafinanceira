@@ -53,6 +53,24 @@ public class Carteira {
         return ativos;
     }
 
+    public void imprimirCarteira() {
+        if (ativos.isEmpty()) {
+            System.out.println("Carteira vazia.");
+            return;
+        }
+
+        System.out.println("Carteira:");
+
+        for (Ativos a : ativos) {
+            System.out.println(
+                a.getTicker() +
+                "Quantidade: " + a.getQtd() +
+                "Preço: " + a.getPrecoAtual()
+            );
+        }
+    }
+
+
     public double getQuantidade(){
         return quantidade;
     } 
