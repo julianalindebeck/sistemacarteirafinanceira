@@ -119,7 +119,7 @@ public class GerenciamentoAtivos {
         String nome = leitura.nextLine();
 
         System.out.println("\nDigite o ticker: ");
-        String ticker = leitura.nextLine();
+        String ticker = verificaTicker();
 
         System.out.println("\nDigite o preço: ");
         double precoAtual = verificaPreco();
@@ -739,11 +739,25 @@ public class GerenciamentoAtivos {
                 }
                 return preco;
             } catch (InvalidPriceException e) {
-                System.out.println("\nPreço inválido! O preço deve ser maior que zero. Digite novamente:\n");
+                System.out.println("\nPreço inválido! O preço deve ser maior que zero. \nDigite o preço novamente:");
             }
         }
     }
 
+    private String verificaTicker(){
+        while (true) {
+            try {
+                String ticker = leitura.nextLine();
+                if (ticker == null || ticker.isBlank() || ticker.equals("0")) {
+                    throw new excecoes.InvalidTickerException();
+                }
+                return ticker.trim();
+            } catch (excecoes.InvalidTickerException e) {
+                System.out.println("\nTicker inválido! Não pode ser vazio ou zero. \nDigite o ticker novamente:");
+            }
+        }
+    }
+    
     private void esperar(long ms){
         try{
             Thread.sleep(ms);

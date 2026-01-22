@@ -53,13 +53,13 @@ public class Carteira {
             return;
         }
 
-        System.out.println("Carteira:");
+        System.out.println("Carteira: ");
 
         for (Ativos a : ativos) {
             System.out.println(
-                a.getTicker() +
-                "Quantidade: " + a.getQtd() +
-                "Preço: " + a.getPrecoAtual()
+                "Ticker: " + a.getTicker() +
+                " | Quantidade: " + a.getQtd() +
+                " | Preço: " + a.getPrecoAtual()
             );
         }
     }
