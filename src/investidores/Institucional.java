@@ -17,7 +17,7 @@ public class Institucional extends Investidor {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "Nome: " + nome  +
                 ", CNPJ: " + id +
                 ", razão social: " + razao +

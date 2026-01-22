@@ -2,6 +2,7 @@ package investidores;
 
 import ativos.Ativos;
 import excecoes.InvalidHeritageException;
+import excecoes.InvalidQuantityException;
 
 public abstract class Investidor {
     protected String nome;
@@ -19,19 +20,23 @@ public abstract class Investidor {
         this.telefone = telefone;
         this.nascimento = nascimento;
         this.endereco = endereco;
+        setPatrimonio(patrimonio);
 
-        this.patrimonio = patrimonio;
         if(patrimonio >= 1000000){
             this.qualificado=true;
         }
         else{
             this.qualificado=false;
         }
-        
+
         this.carteira = new Carteira();
     }
 
     public void comprarAtivo(Ativos ativo, double quantidade){
+        if(quantidade <=0){
+            throw new InvalidQuantityException();
+        }
+        
         ativo.setQtd(quantidade);
 
         double custo = ativo.getPrecoAtual() * quantidade;
@@ -45,6 +50,10 @@ public abstract class Investidor {
     }
 
     public void venderAtivo(String ticker, double quantidade){
+        if(quantidade <=0){
+            throw new InvalidQuantityException();
+        }
+        
         carteira.removerAtivo(ticker, quantidade);
 
         double preco = 0;

@@ -731,14 +731,14 @@ public class GerenciamentoAtivos {
     }
 
     private double verificaPreco() {
-        while (true) {
-            try {
+        while(true){
+            try{
                 double preco = verificaDouble();
                 if (preco <= 0) {
                     throw new InvalidPriceException();
                 }
                 return preco;
-            } catch (InvalidPriceException e) {
+            }catch(InvalidPriceException e){
                 System.out.println("\nPreço inválido! O preço deve ser maior que zero. \nDigite o preço novamente:");
             }
         }

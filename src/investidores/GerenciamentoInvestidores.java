@@ -412,17 +412,17 @@ public class GerenciamentoInvestidores {
         }
     }
 
-    private double verificaQuantidade() {
-        while (true) {
-            try {
+    private double verificaQuantidade(){
+        while(true){
+            try{
                 double quantidade = verificaDouble();
 
-                if (quantidade <= 0) {
+                if(quantidade <= 0){
                     throw new IllegalArgumentException("\nQuantidade inválida! Deve ser maior que zero.\n");
                 }
 
                 return quantidade;
-            } catch (IllegalArgumentException e) {
+            }catch(IllegalArgumentException e){
                 System.out.println("\nQuantidade inválida! Digite novamente:\n");
             }
         }

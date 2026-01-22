@@ -47,15 +47,15 @@ public class Carteira {
         return ativos;
     }
 
-    public void imprimirCarteira() {
-        if (ativos.isEmpty()) {
+    public void imprimirCarteira(){
+        if(ativos.isEmpty()){
             System.out.println("Carteira vazia.");
             return;
         }
 
         System.out.println("Carteira: ");
 
-        for (Ativos a : ativos) {
+        for(Ativos a : ativos){
             System.out.println(
                 "Ticker: " + a.getTicker() +
                 " | Quantidade: " + a.getQtd() +
@@ -68,7 +68,7 @@ public class Carteira {
     public double getQuantidade(){
         double quantidade = 0;
 
-        for (Ativos a : ativos) {
+        for(Ativos a : ativos){
             quantidade += a.getQtd();
         }
 
