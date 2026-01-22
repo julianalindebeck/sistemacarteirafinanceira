@@ -44,7 +44,7 @@ public abstract class Ativos {
     }
 
     public void setTicker(String ticker){
-        if(ticker == null || ticker == "0"){
+        if(ticker == null || ticker.isBlank()){
             throw new InvalidTickerException();
         }
 

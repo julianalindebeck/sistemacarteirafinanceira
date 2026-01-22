@@ -356,7 +356,7 @@ public class GerenciamentoInvestidores {
         String ticker = leitura.nextLine();
 
         System.out.println("\nDigite a quantidade:");
-        double quantidade = verificaDouble();
+        double quantidade = verificaQuantidade();
 
         try{
             if(escolha.equals("1")){
@@ -399,14 +399,31 @@ public class GerenciamentoInvestidores {
     private double lerPatrimonio(){
         while (true) {
             try {
-                double valor = verificaDouble();
-                if (valor < 0) {
+                double patrimonio = verificaDouble();
+
+                if (patrimonio < 0) {
                     throw new InvalidHeritageException();
                 }
-                return valor;
+
+                return patrimonio;
             } catch (InvalidHeritageException e) {
-                System.out.println(e.getMessage());
-                System.out.println("\nDigite o patrimônio novamente:");
+                System.out.println("\nPatrimônio inválido! O patrimônio não pode ser negativo. Digite novamente:\n");
+            }
+        }
+    }
+
+    private double verificaQuantidade() {
+        while (true) {
+            try {
+                double quantidade = verificaDouble();
+
+                if (quantidade <= 0) {
+                    throw new IllegalArgumentException("\nQuantidade inválida! Deve ser maior que zero.\n");
+                }
+
+                return quantidade;
+            } catch (IllegalArgumentException e) {
+                System.out.println("\nQuantidade inválida! Digite novamente:\n");
             }
         }
     }

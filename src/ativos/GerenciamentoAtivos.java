@@ -3,6 +3,7 @@ package ativos;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import excecoes.InvalidPriceException;
 import leituraDeArquivos.Leitor;
 import java.math.BigInteger;
 
@@ -121,7 +122,7 @@ public class GerenciamentoAtivos {
         String ticker = leitura.nextLine();
 
         System.out.println("\nDigite o preço: ");
-        double precoAtual = verificaDouble();
+        double precoAtual = verificaPreco();
 
         switch(escolha){
             case "1": {
@@ -725,6 +726,20 @@ public class GerenciamentoAtivos {
             } catch(InputMismatchException e){
                 System.out.println("\nEntrada inválida! Digite (true) para qualificado e (false) para não qualificado.");
                 leitura.nextLine();
+            }
+        }
+    }
+
+    private double verificaPreco() {
+        while (true) {
+            try {
+                double preco = verificaDouble();
+                if (preco <= 0) {
+                    throw new InvalidPriceException();
+                }
+                return preco;
+            } catch (InvalidPriceException e) {
+                System.out.println("\nPreço inválido! O preço deve ser maior que zero. Digite novamente:\n");
             }
         }
     }
