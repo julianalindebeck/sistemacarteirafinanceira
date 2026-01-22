@@ -9,12 +9,6 @@ import ativos.AtivosNacionais;
 
 public class Carteira {
     private List<Ativos> ativos = new ArrayList<>();
-    private double quantidade;
-    private double valorTotal = 0;
-    private double rendaFixa = 0;
-    private double rendaVariavel = 0; //double?
-    private double internacionais = 0;
-    private double nacionais = 0;
 
     public Carteira(){
         this.ativos = new ArrayList<>();
@@ -70,52 +64,81 @@ public class Carteira {
         }
     }
 
-
+    //qtd total de ativos na carteira
     public double getQuantidade(){
+        double quantidade = 0;
+
+        for (Ativos a : ativos) {
+            quantidade += a.getQtd();
+        }
+
         return quantidade;
-    } 
+    }
 
     public double getValorTotal(){
-        for(Ativos a : ativos)
-            valorTotal += a.getPrecoAtual();
+        double total = 0;
 
-        return valorTotal;
+        for (Ativos a : ativos) {
+            total += a.getPrecoAtual() * a.getQtd();
+        }
+
+        return total;
     }
 
     public double getPorcentagemRendaVar(){
+        double total = getQuantidade();
+        if(total == 0) return 0;
+
+        double rendaVariavel = 0;
+
         for(Ativos a : ativos){
             if(a.getRenda())
-                rendaVariavel++;
+                rendaVariavel += a.getQtd();
         }
 
-        return (rendaVariavel/quantidade) * 100;
+        return (rendaVariavel/total) * 100;
     }
 
     public double getPorcentagemRendaFixa(){
+        double total = getQuantidade();
+        if(total == 0) return 0;
+
+        double rendaFixa = 0;
+
         for(Ativos a : ativos){
             if(!a.getRenda())
-                rendaFixa++;
+                rendaFixa += a.getQtd();
         }
 
-        return (rendaFixa/quantidade) * 100;
+        return (rendaFixa/total) * 100;
     }
 
     public double getPorcentagemInter(){
+        double total = getQuantidade();
+        if(total == 0) return 0;
+
+        double internacionais = 0;
+
         for(Ativos a : ativos){
             if(a instanceof AtivosInternacionais)
-                internacionais++;
+                internacionais += a.getQtd();
         }
 
-        return (internacionais/quantidade) * 100;
+        return (internacionais/total) * 100;
     }
 
     public double getPorcentagemNacional(){
+        double total = getQuantidade();
+        if(total == 0) return 0;
+
+        double nacionais = 0;
+        
         for(Ativos a : ativos){
             if(a instanceof AtivosNacionais)
-                nacionais++;
+                nacionais += a.getQtd();
         }
 
-        return (nacionais/quantidade) * 100;
+        return (nacionais/total) * 100;
     }
 
 }
