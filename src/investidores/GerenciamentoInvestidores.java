@@ -1,6 +1,5 @@
 package investidores;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +15,6 @@ public class GerenciamentoInvestidores {
 
     private List<PessoaFisica> pessoaFisica;
     private List<Institucional> institucional;
-    private List<String> ids = new ArrayList<>();
     private GerenciamentoAtivos gerenciamentoAtivos;
 
     public GerenciamentoInvestidores(
@@ -34,7 +32,7 @@ public class GerenciamentoInvestidores {
     public void menuInvestidor(){
         do{
             System.out.println("\n*------------* MENU INVESTIDOR *------------*");
-            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Selecionar Investidor\n(6) Visualizar Ativos e outras opções \n(7) Voltar ao menu principal");
+            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores (por CPF/CNPJ separados por ',')\n(5) Selecionar Investidor\n(6) Visualizar ativos e outras opções \n(7) Voltar ao menu principal");
 
             escolha = leitura.nextLine();
         } while(!escolha.matches("[1-7]"));
@@ -225,20 +223,13 @@ public class GerenciamentoInvestidores {
 
     //excluir investidores
     private void excluirInvestidorSelecionado(Investidor inv){
-        atualizaIDs();
-        Carteira carteira = inv.getCarteira();
+        inv.getCarteira().excluirCarteira();
 
         if(inv instanceof PessoaFisica){
             pessoaFisica.remove(inv);
-            exibirPessoaFisica();
-            carteira.excluirCarteira();
-            carteira.imprimirCarteira();
-        }
-        else if(inv instanceof Institucional){
+        } 
+        else{
             institucional.remove(inv);
-            exibirInstitucional();
-            carteira.excluirCarteira();//so pra testar
-            carteira.imprimirCarteira();
         }
     }
 
@@ -276,18 +267,6 @@ public class GerenciamentoInvestidores {
             }
         }
         return null;
-    }
-
-    private void atualizaIDs(){
-        ids.clear();
-
-        for(PessoaFisica p : pessoaFisica){
-            ids.add(p.getId());
-        }
-
-        for(Institucional i : institucional){
-            ids.add(i.getId());
-        }
     }
 
     //editar investidores
