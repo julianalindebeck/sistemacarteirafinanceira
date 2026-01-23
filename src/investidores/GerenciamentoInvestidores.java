@@ -131,7 +131,7 @@ public class GerenciamentoInvestidores {
         System.out.println("\nDigite o telefone: ");
         String telefone = leitura.nextLine();
 
-        System.out.println("\nDigite a data de nascimento: ");
+        System.out.println("\nDigite a data de nascimento (dd/mm/aa): ");
         String nascimento = leitura.nextLine();
 
         System.out.println("\nDigite o endereço: ");
@@ -292,6 +292,64 @@ public class GerenciamentoInvestidores {
         }
     }
 
+    //realizar movimentação
+    private void realizarMovimentacao(){
+        Investidor investidor = selecionarInvestidor();
+        if(investidor == null){
+            return;
+        }
+
+        System.out.println("\nEscolha o que deseja:\n(1) Comprar ativo\n(2) Vender ativo");
+        escolha = leitura.nextLine();
+
+        System.out.println("\nTicker do ativo:");
+        String ticker = leitura.nextLine();
+
+        System.out.println("\nQuantidade:");
+        double quantidade = verificaQuantidade();
+
+        System.out.println("\nDigite a data (dd/mm/aa) da movimentação: ");
+        String data = leitura.nextLine();
+
+        try{
+            if(escolha.equals("1")){
+                Ativos ativo = gerenciamentoAtivos.buscarAtivos(ticker);
+                if(ativo == null){
+                    System.out.println("\nAtivo não encontrado.");
+                    return;
+                }
+
+                Ativos ativoCompra = ativo.clonar();
+
+                investidor.comprarAtivo(ativoCompra, quantidade);
+
+                Movimentacao mov = new Movimentacao(ativo.getTicker() + "C", "C", ativo.getNome(), ticker, quantidade, data, ativo.getPrecoAtual());
+
+                investidor.registrarMovimentacao(mov);
+
+                carregar();
+                esperar(700);
+                System.out.println("\nCompra realizada com sucesso!");
+            }
+            else{
+                investidor.venderAtivo(ticker, quantidade);
+
+                Movimentacao mov = new Movimentacao(investidor.getId() + "V", "V", "Venda", ticker, quantidade, data, 0);
+
+                investidor.registrarMovimentacao(mov);
+
+                carregar();
+                esperar(700);
+                System.out.println("\nVenda realizada com sucesso!");
+            }
+
+            investidor.getCarteira().imprimirCarteira();
+
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     //selecionar investidores
     private Investidor selecionarInvestidor(){        
         do{
@@ -336,78 +394,19 @@ public class GerenciamentoInvestidores {
         return null;
     }
 
-    //realizar movimentação
-    private void realizarMovimentacao(){
-        Investidor investidor = selecionarInvestidor();
-        if (investidor == null){
-            return;
-        }
-
-        do{
-            System.out.println("\n(1) Comprar ativo\n(2) Vender ativo\n(3) Voltar para o menu inicial");
-            escolha = leitura.nextLine();
-        } while(!escolha.matches("[1-3]"));
-
-        if(escolha.equals("3")){
-            return;
-        }
-
-        System.out.println("\nDigite o ticker do ativo:");
-        String ticker = leitura.nextLine();
-
-        System.out.println("\nDigite a quantidade:");
-        double quantidade = verificaQuantidade();
-
-        try{
-            if(escolha.equals("1")){
-                Ativos ativo = gerenciamentoAtivos.buscarAtivos(ticker);
-                if(ativo == null){
-                    System.out.println("\nAtivo não encontrado.");
-                    return;
-                }
-
-                Ativos ativoCompra = ativo.clonar();
-
-                investidor.comprarAtivo(ativoCompra, quantidade);
-                System.out.println("\nCompra realizada com sucesso!");
-                investidor.getCarteira().imprimirCarteira();
-            } 
-            else{
-                investidor.venderAtivo(ticker, quantidade);
-                System.out.println("\nVenda realizada com sucesso!");
-                investidor.getCarteira().imprimirCarteira();
-            }
-        } catch(Exception e){
-            System.out.println("\nErro: " + e.getMessage());
-        }
-    }
-
     //funções de auxílio
-    private double verificaDouble(){
+    private double lerPatrimonio(){
         while(true){
             try{
-                double valor = leitura.nextDouble();
-                leitura.nextLine();
-                return valor;
-            } catch(InputMismatchException e){
-                System.out.println("\nEntrada inválida! Digite novamente:");
-                leitura.nextLine();
-            }
-        }
-    }
-
-    private double lerPatrimonio(){
-        while (true) {
-            try {
                 double patrimonio = verificaDouble();
 
-                if (patrimonio < 0) {
+                if(patrimonio < 0){
                     throw new InvalidHeritageException();
                 }
 
                 return patrimonio;
-            } catch (InvalidHeritageException e) {
-                System.out.println("\nPatrimônio inválido! O patrimônio não pode ser negativo. Digite novamente:\n");
+            } catch(InvalidHeritageException e){
+                System.out.println(e.getMessage() + "\n\nDigite o patrimônio novamente:");
             }
         }
     }
@@ -422,8 +421,21 @@ public class GerenciamentoInvestidores {
                 }
 
                 return quantidade;
-            }catch(IllegalArgumentException e){
-                System.out.println("\nQuantidade inválida! Digite novamente:\n");
+            } catch(IllegalArgumentException e){
+                System.out.println("\nQuantidade inválida! Digite novamente:");
+            }
+        }
+    }
+
+    private double verificaDouble(){
+        while(true){
+            try{
+                double valor = leitura.nextDouble();
+                leitura.nextLine();
+                return valor;
+            } catch(InputMismatchException e){
+                System.out.println("\nEntrada inválida! Digite novamente:");
+                leitura.nextLine();
             }
         }
     }

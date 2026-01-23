@@ -28,5 +28,36 @@ public class Movimentacao {
         this.preco = preco;
     }
 
-}
+    public boolean verificaCompra(){
+        return indicador.equalsIgnoreCase("C");
+    }
 
+    public boolean verificaVenda(){
+        return indicador.equalsIgnoreCase("V");
+    }
+
+    public String getId(){
+        return this.id;
+    }
+
+    public String getInstituicao(){
+        return this.instituicao;
+    }
+
+    public String getAtivo(){
+        return this.ativo;
+    }
+
+    public double getQtd(){
+        return this.qtd;
+    }
+
+    public String getData(){
+        return this.data;
+    }
+
+    public double getPreco(){
+        return this.preco;
+    }
+
+}

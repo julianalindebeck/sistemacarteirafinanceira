@@ -703,19 +703,34 @@ public class GerenciamentoAtivos {
     }
 
     //funções de auxílio
-    private double verificaDouble(){
+    private String verificaTicker(){
         while(true){
             try{
-                double valor = leitura.nextDouble();
-                leitura.nextLine();
-                return valor;
-            } catch(InputMismatchException e){
-                System.out.println("\nEntrada inválida! Digite novamente:");
-                leitura.nextLine();
+                String ticker = leitura.nextLine();
+                if(ticker == null || ticker.isBlank() || ticker.equals("0")){
+                    throw new excecoes.InvalidTickerException();
+                }
+                return ticker.trim();
+            } catch(excecoes.InvalidTickerException e){
+                System.out.println(e.getMessage() + "\n\nDigite o ticker novamente:");
             }
         }
     }
-    
+
+    private double verificaPreco(){
+        while(true){
+            try{
+                double preco = verificaDouble();
+                if(preco <= 0){
+                    throw new InvalidPriceException();
+                }
+                return preco;
+            } catch(InvalidPriceException e){
+                System.out.println(e.getMessage() + "\n\nDigite o preço novamente:");
+            }
+        }
+    }
+
     private boolean verificaQualificado(){
         while(true){
             try{
@@ -730,30 +745,15 @@ public class GerenciamentoAtivos {
         }
     }
 
-    private double verificaPreco() {
+    private double verificaDouble(){
         while(true){
             try{
-                double preco = verificaDouble();
-                if (preco <= 0) {
-                    throw new InvalidPriceException();
-                }
-                return preco;
-            }catch(InvalidPriceException e){
-                System.out.println("\nPreço inválido! O preço deve ser maior que zero. \nDigite o preço novamente:");
-            }
-        }
-    }
-
-    private String verificaTicker(){
-        while (true) {
-            try {
-                String ticker = leitura.nextLine();
-                if (ticker == null || ticker.isBlank() || ticker.equals("0")) {
-                    throw new excecoes.InvalidTickerException();
-                }
-                return ticker.trim();
-            } catch (excecoes.InvalidTickerException e) {
-                System.out.println("\nTicker inválido! Não pode ser vazio ou zero. \nDigite o ticker novamente:");
+                double valor = leitura.nextDouble();
+                leitura.nextLine();
+                return valor;
+            } catch(InputMismatchException e){
+                System.out.println("\nEntrada inválida! Digite novamente:");
+                leitura.nextLine();
             }
         }
     }

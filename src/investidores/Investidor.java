@@ -1,8 +1,10 @@
 package investidores;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ativos.Ativos;
 import excecoes.InvalidHeritageException;
-import excecoes.InvalidQuantityException;
 
 public abstract class Investidor {
     protected String nome;
@@ -13,6 +15,7 @@ public abstract class Investidor {
     protected double patrimonio;
     protected Carteira carteira;
     protected boolean qualificado;
+    protected List<Movimentacao> historico;
 
     public Investidor(String nome, String id, String telefone, String nascimento, String endereco, double patrimonio){
         this.nome = nome;
@@ -23,20 +26,21 @@ public abstract class Investidor {
         setPatrimonio(patrimonio);
 
         if(patrimonio >= 1000000){
-            this.qualificado=true;
+            this.qualificado = true;
         }
         else{
-            this.qualificado=false;
+            this.qualificado = false;
         }
 
         this.carteira = new Carteira();
+        this.historico = new ArrayList<>();
+    }
+
+    public void registrarMovimentacao(Movimentacao mov){
+        historico.add(mov);
     }
 
     public void comprarAtivo(Ativos ativo, double quantidade){
-        if(quantidade <=0){
-            throw new InvalidQuantityException();
-        }
-        
         ativo.setQtd(quantidade);
 
         double custo = ativo.getPrecoAtual() * quantidade;
@@ -46,17 +50,15 @@ public abstract class Investidor {
         }
 
         carteira.adicionarAtivo(ativo);
+
         patrimonio -= custo;
     }
 
     public void venderAtivo(String ticker, double quantidade){
-        if(quantidade <=0){
-            throw new InvalidQuantityException();
-        }
-        
         carteira.removerAtivo(ticker, quantidade);
 
         double preco = 0;
+
         for(Ativos a : carteira.getAtivos()){
             if(a.getTicker().equalsIgnoreCase(ticker)){
                 preco = a.getPrecoAtual();
