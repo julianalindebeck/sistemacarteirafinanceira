@@ -30,6 +30,14 @@ public class Criptoativo extends AtivosInternacionais {
     }
 
     @Override
+    public Ativos clonar(){
+        Criptoativo copia = new Criptoativo(this.nome, this.ticker, this.precoAtual, this.algoritmo, this.qtdMax);
+        copia.setQualificado(this.qualificado);
+        copia.setQtd(this.qtd);
+        return copia;
+    }
+
+    @Override
     public String toString() {
         return "Nome: " + nome  +
                ", ticker: " + ticker +

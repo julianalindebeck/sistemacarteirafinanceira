@@ -14,18 +14,11 @@ public abstract class Ativos {
     public Ativos(String nome, String ticker, double precoAtual){
         this.nome = nome;
         setTicker(ticker);
-        this.precoAtual = precoAtual;
+        setPrecoAtual(precoAtual);
         this.qualificado = false;
     }
 
-    public Ativos clonar() {
-        return new Ativos(
-            this.nome,
-            this.ticker,
-            this.precoAtual
-        ) {
-        };
-    }
+    public abstract Ativos clonar();
     
     public void setNome(String nome){
         this.nome = nome;
@@ -82,5 +75,4 @@ public abstract class Ativos {
     public boolean getRenda(){
         return rendaVariavel;
     }
-
 }

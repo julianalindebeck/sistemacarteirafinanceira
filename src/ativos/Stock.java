@@ -28,6 +28,14 @@ public class Stock extends AtivosInternacionais {
     }
 
     @Override
+    public Ativos clonar(){
+        Stock copia = new Stock(this.nome, this.ticker, this.precoAtual, this.bolsa, this.setor);
+        copia.setQualificado(this.qualificado);
+        copia.setQtd(this.qtd);
+        return copia;
+    }
+
+    @Override
     public String toString() {
         return "Nome: " + nome  +
                ", ticker: " + ticker +

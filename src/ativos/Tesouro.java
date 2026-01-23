@@ -23,10 +23,18 @@ public class Tesouro extends AtivosNacionais {
         this.vencimento = vencimento;
     }
 
-    public String getInvestimento(){
+    public String getVencimento(){
         return vencimento;
     }
 
+    @Override
+    public Ativos clonar(){
+        Tesouro copia = new Tesouro(this.nome, this.ticker, this.precoAtual, this.rendimento, this.vencimento);
+        copia.setQualificado(this.qualificado);
+        copia.setQtd(this.qtd);
+        return copia;
+    }
+    
     @Override
     public String toString() {
         return "Nome: " + nome  +

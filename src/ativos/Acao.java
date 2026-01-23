@@ -18,6 +18,14 @@ public class Acao extends AtivosNacionais {
     }
 
     @Override
+    public Ativos clonar(){
+        Acao copia = new Acao(this.nome, this.ticker, this.precoAtual, this.qualificado);
+        copia.setTipo(this.tipo);
+        copia.setQtd(this.qtd);
+        return copia;
+    }
+
+    @Override
     public String toString() {
         return "Nome: " + nome  +
                ", ticker: " + ticker +

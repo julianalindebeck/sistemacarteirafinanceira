@@ -43,6 +43,14 @@ public class Fii extends AtivosNacionais {
     }
 
     @Override
+    public Ativos clonar(){
+        Fii copia = new Fii(this.nome, this.ticker, this.precoAtual, this.segmento, this.dividendo, this.taxaAdm);
+        copia.setQualificado(this.qualificado);
+        copia.setQtd(this.qtd);
+        return copia;
+    }
+
+    @Override
     public String toString() {
         return "Nome: " + nome  +
                ", ticker: " + ticker +
