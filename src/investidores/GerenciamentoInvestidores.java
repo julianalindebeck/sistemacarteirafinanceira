@@ -34,10 +34,10 @@ public class GerenciamentoInvestidores {
     public void menuInvestidor(){
         do{
             System.out.println("\n*------------* MENU INVESTIDOR *------------*");
-            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Editar Investidor\n(6) Visualizar Ativos e outras opções\n(7) Realizar movimentação\n(8) Voltar ao menu inicial");
+            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Selecionar Investidor\n(6) Visualizar Ativos e outras opções");
 
             escolha = leitura.nextLine();
-        } while(!escolha.matches("[1-8]"));
+        } while(!escolha.matches("[1-6]"));
         
         switch(escolha){
             case "1":
@@ -50,34 +50,46 @@ public class GerenciamentoInvestidores {
                 exibirInvestidores();
                 break;
             case "4":
-                excluirInvestidor();
+                excluirInvestidorPorLista();
                 break;
             case "5": {
                 Investidor inv = selecionarInvestidor();
 
-                if(inv == null){
-                    return;
-                }
-
-                if(inv instanceof PessoaFisica){
-                    editarPessoaFisica((PessoaFisica) inv);
-                }
-                else if(inv instanceof Institucional){
-                    editarInstitucional((Institucional) inv);
+                if(inv != null){
+                    menuInvestidorSelecionado(inv);
                 }
                 break;
             }
             case "6":
-                opçoesAtivos();
-                break;
-            case "7":
-                realizarMovimentacao();
-                break;
-            case "8":
                 return;
         }
     }
 
+    public void menuInvestidorSelecionado(Investidor inv){
+        do{
+            System.out.println("\n*------------* INVESTIDOR SELECIONADO *------------*");
+            System.out.println("(1) Editar Investidor \n(2) Excluir investidor\n(3) Exibir ativos\n(4) Voltar ao menu inicial");
+
+            escolha = leitura.nextLine();
+        } while(!escolha.matches("[1-4]"));
+
+        switch(escolha){
+            case "1":
+                if(inv instanceof PessoaFisica){
+                    editarPessoaFisica((PessoaFisica) inv);
+                } else {
+                    editarInstitucional((Institucional) inv);
+                }
+                break;
+
+            case "2":
+                excluirInvestidorSelecionado(inv);
+                return;
+
+            case "3":
+                return;
+        }
+    }
     //cadastrar investidores
     private void cadastrarInvestidor(){
         System.out.println("\n*------------* CADASTRAR INVESTIDOR *------------*");
@@ -200,9 +212,8 @@ public class GerenciamentoInvestidores {
     }
 
     //excluir investidores
-    private void excluirInvestidor(){
+    private void excluirInvestidorSelecionado(Investidor inv){
         atualizaIDs();
-        Investidor inv = selecionarInvestidor();
         Carteira carteira = inv.getCarteira();
 
         if(inv instanceof PessoaFisica){
@@ -217,6 +228,11 @@ public class GerenciamentoInvestidores {
             carteira.excluirCarteira();//so pra testar
             carteira.imprimirCarteira();
         }
+    }
+
+    private void excluirInvestidorPorLista(){
+        System.out.println("Digite os CPFs/CNPJs separados por vírgula:");
+        String escolha = leitura.nextLine();
     }
 
     private void atualizaIDs(){
