@@ -124,4 +124,7 @@ public abstract class Investidor {
         return this.patrimonio;
     }
 
+    public List<Movimentacao> getHistorico(){
+        return historico;
+    }
 }

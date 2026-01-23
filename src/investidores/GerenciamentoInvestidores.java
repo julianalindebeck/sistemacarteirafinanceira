@@ -87,6 +87,9 @@ public class GerenciamentoInvestidores {
                 return;
 
             case "3":
+                opçoesAtivos(inv);
+                break;
+            case "4":
                 return;
         }
     }
@@ -233,6 +236,7 @@ public class GerenciamentoInvestidores {
     private void excluirInvestidorPorLista(){
         System.out.println("Digite os CPFs/CNPJs separados por vírgula:");
         String escolha = leitura.nextLine();
+
     }
 
     private void atualizaIDs(){
@@ -290,7 +294,8 @@ public class GerenciamentoInvestidores {
     }
 
     //ativos
-    private void opçoesAtivos(){
+    private void opçoesAtivos(Investidor inv){
+        Carteira c = inv.getCarteira();
         do{
             System.out.println("\n*------------* ATIVOS *------------*");
             System.out.println("(1) Exibir Ativos\n(2) Exibir valor total gasto\n(3) Exibir valor total atual\n(4) Exibir porcentagem de produtos de renda fixa e variável\n(5) Exibir porcentagem de produtos internacionais e nacionais\n(6) Salvar relatório\n(7) Voltar ao menu inicial");
@@ -300,27 +305,64 @@ public class GerenciamentoInvestidores {
 
         switch(escolha){
             case "1":
-                //exibirAtivos();
+                exibirAtivos(inv);
                 break;
             case "2":
-                //exibirValorTotalGasto();
+                exibirValorTotalGasto(inv);
                 break;
             case "3":
-                //exibirValorTotalAtual();
+                exibirValorTotalAtual(inv);
                 break;
             case "4":
-                //exibirPorcentagemRenda();
+                exibirPorcentagemRenda(inv);
                 break;
             case "5":
-                //exibirPorcentagemIntNac();
+                exibirPorcentagemIntNac(inv);
                 break;
             case "6":
-                //salvarRelatorio();
+                //salvarRelatorio(inv);
                 break;
             case "7":
                 return;
         }
     }
+    private void exibirAtivos(Investidor inv){
+        inv.getCarteira().imprimirCarteira();
+    }
+
+    private void exibirValorTotalAtual(Investidor inv){
+        double total = inv.getCarteira().getValorTotal();
+        System.out.println("\nValor total atual da carteira: R$ " + total);
+    }
+
+    private void exibirValorTotalGasto(Investidor inv){
+        double totalGasto = 0;
+
+        for(Movimentacao m : inv.getHistorico()){
+            if(m.verificaCompra()){
+                totalGasto += m.getQtd() * m.getPreco();
+            }
+        }
+
+        System.out.println("\nValor total gasto em compras: R$ " + totalGasto);
+    }
+
+    private void exibirPorcentagemRenda(Investidor inv){
+        double rendaVar = inv.getCarteira().getPorcentagemRendaVar();
+        double rendaFixa = inv.getCarteira().getPorcentagemRendaFixa();
+
+        System.out.println("\nPorcentagem renda variável: " + rendaVar + "%");
+        System.out.println("Porcentagem renda fixa: " + rendaFixa + "%");
+    }
+
+    private void exibirPorcentagemIntNac(Investidor inv){
+        double inter = inv.getCarteira().getPorcentagemInter();
+        double nac = inv.getCarteira().getPorcentagemNacional();
+
+        System.out.println("\nPorcentagem ativos internacionais: " + inter + "%");
+        System.out.println("Porcentagem ativos nacionais: " + nac + "%");
+    }
+
 
     //realizar movimentação
     private void realizarMovimentacao(){
