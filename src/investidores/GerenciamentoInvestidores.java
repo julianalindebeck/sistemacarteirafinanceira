@@ -34,10 +34,10 @@ public class GerenciamentoInvestidores {
     public void menuInvestidor(){
         do{
             System.out.println("\n*------------* MENU INVESTIDOR *------------*");
-            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Selecionar Investidor\n(6) Visualizar Ativos e outras opções");
+            System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Selecionar Investidor\n(6) Visualizar Ativos e outras opções \n(7) Voltar ao menu principal");
 
             escolha = leitura.nextLine();
-        } while(!escolha.matches("[1-6]"));
+        } while(!escolha.matches("[1-7]"));
         
         switch(escolha){
             case "1":
@@ -61,6 +61,12 @@ public class GerenciamentoInvestidores {
                 break;
             }
             case "6":
+                Investidor inv = selecionarInvestidor();
+                if(inv != null){
+                    opcoesAtivos(inv);
+                }
+                break;
+            case "7":
                 return;
         }
     }
@@ -68,10 +74,10 @@ public class GerenciamentoInvestidores {
     public void menuInvestidorSelecionado(Investidor inv){
         do{
             System.out.println("\n*------------* INVESTIDOR SELECIONADO *------------*");
-            System.out.println("(1) Editar Investidor \n(2) Excluir investidor\n(3) Exibir ativos\n(4) Voltar ao menu inicial");
+            System.out.println("(1) Editar Investidor \n(2) Excluir investidor\n(3) Exibir ativos\n(4) Realizar movimentações\n(5) Voltar ao menu inicial");
 
             escolha = leitura.nextLine();
-        } while(!escolha.matches("[1-4]"));
+        } while(!escolha.matches("[1-5]"));
 
         switch(escolha){
             case "1":
@@ -87,9 +93,12 @@ public class GerenciamentoInvestidores {
                 return;
 
             case "3":
-                opçoesAtivos(inv);
+                opcoesAtivos(inv);
                 break;
             case "4":
+                realizarMovimentacao();
+                break;
+            case "5":
                 return;
         }
     }
@@ -237,6 +246,36 @@ public class GerenciamentoInvestidores {
         System.out.println("Digite os CPFs/CNPJs separados por vírgula:");
         String escolha = leitura.nextLine();
 
+        if(escolha == null || escolha.isBlank()){
+            System.out.println("\nNenhum id informado.");
+            return;
+        }
+
+        String[] listaIds = escolha.split(",");
+
+        for(String id : listaIds){
+            Investidor inv = buscarInvestidor(id);
+            if(inv != null){
+                excluirInvestidorSelecionado(inv);
+                System.out.println("\nInvestidor com ID " + id + " excluído com sucesso.");
+            } else {
+                System.out.println("\nInvestidor com ID " + id + " não encontrado.");
+            }
+        }
+    }
+
+    private Investidor buscarInvestidor(String id){
+        for(PessoaFisica p : pessoaFisica){
+            if(p.getId().equals(id)){
+                return p;
+            }
+        }
+        for(Institucional i : institucional){
+            if(i.getId().equals(id)){
+                return i;
+            }
+        }
+        return null;
     }
 
     private void atualizaIDs(){
@@ -294,8 +333,7 @@ public class GerenciamentoInvestidores {
     }
 
     //ativos
-    private void opçoesAtivos(Investidor inv){
-        Carteira c = inv.getCarteira();
+    private void opcoesAtivos(Investidor inv){
         do{
             System.out.println("\n*------------* ATIVOS *------------*");
             System.out.println("(1) Exibir Ativos\n(2) Exibir valor total gasto\n(3) Exibir valor total atual\n(4) Exibir porcentagem de produtos de renda fixa e variável\n(5) Exibir porcentagem de produtos internacionais e nacionais\n(6) Salvar relatório\n(7) Voltar ao menu inicial");
