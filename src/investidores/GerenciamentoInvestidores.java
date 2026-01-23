@@ -202,7 +202,21 @@ public class GerenciamentoInvestidores {
     //excluir investidores
     private void excluirInvestidor(){
         atualizaIDs();
-        //completar
+        Investidor inv = selecionarInvestidor();
+        Carteira carteira = inv.getCarteira();
+
+        if(inv instanceof PessoaFisica){
+            pessoaFisica.remove(inv);
+            exibirPessoaFisica();
+            carteira.excluirCarteira();
+            carteira.imprimirCarteira();
+        }
+        else if(inv instanceof Institucional){
+            institucional.remove(inv);
+            exibirInstitucional();
+            carteira.excluirCarteira();//so pra testar
+            carteira.imprimirCarteira();
+        }
     }
 
     private void atualizaIDs(){

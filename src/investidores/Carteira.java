@@ -154,4 +154,7 @@ public class Carteira {
         return (nacionais/total) * 100;
     }
 
+    public void excluirCarteira(){
+        ativos.clear();
+    }
 }
