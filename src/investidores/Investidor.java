@@ -14,7 +14,6 @@ public abstract class Investidor {
     protected String endereco;
     protected double patrimonio;
     protected Carteira carteira;
-    protected boolean qualificado;
     protected List<Movimentacao> historico;
 
     public Investidor(String nome, String id, String telefone, String nascimento, String endereco, double patrimonio){
@@ -34,10 +33,6 @@ public abstract class Investidor {
     }
 
     public void comprarAtivo(Ativos ativo, double quantidade){
-        if(ativo.getQualificado() && !(this.qualificado)){
-            System.out.println("\nAtivo restrito para investidores qualificados.");
-            return;
-        }
         ativo.setQtd(quantidade);
 
         double custo = ativo.getPrecoAtual() * quantidade;
@@ -52,8 +47,6 @@ public abstract class Investidor {
     }
 
     public void venderAtivo(String ticker, double quantidade){
-        carteira.removerAtivo(ticker, quantidade);
-
         double preco = 0;
 
         for(Ativos a : carteira.getAtivos()){
@@ -62,7 +55,13 @@ public abstract class Investidor {
                 break;
             }
         }
+
+        if(preco == 0){
+            throw new IllegalArgumentException("Ativo não encontrado na carteira.");
+        }
         
+        carteira.removerAtivo(ticker, quantidade);
+
         patrimonio += preco * quantidade;
     }
 

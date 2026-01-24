@@ -43,7 +43,12 @@ public class Leitor {
             String ticker = c[0];
             String nome = c[1];
             double precoaAtual = converteDouble(c[2]);
-            boolean qualificado = Boolean.parseBoolean(c[3]);
+
+            int q = Integer.parseInt(c[3]);
+            boolean qualificado = false;
+            if(q == 1){
+                qualificado = true;
+            }
 
             lista.add(new Acao(nome, ticker, precoaAtual, qualificado));
         }

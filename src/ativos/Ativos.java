@@ -75,4 +75,5 @@ public abstract class Ativos {
     public boolean getRenda(){
         return rendaVariavel;
     }
+    
 }

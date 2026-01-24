@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import ativos.Ativos;
+import ativos.Criptoativo;
 import ativos.GerenciamentoAtivos;
+import ativos.Stock;
 import excecoes.InvalidHeritageException;
 import leituraDeArquivos.Leitor;
 
@@ -75,15 +77,14 @@ public class GerenciamentoInvestidores {
             case "1":
                 if(inv instanceof PessoaFisica){
                     editarPessoaFisica((PessoaFisica) inv);
-                } else {
+                } else{
                     editarInstitucional((Institucional) inv);
                 }
                 break;
 
             case "2":
                 excluirInvestidorSelecionado(inv);
-                return;
-
+                break;
             case "3":
                 opcoesAtivos(inv);
                 break;
@@ -94,6 +95,7 @@ public class GerenciamentoInvestidores {
                 return;
         }
     }
+    
     //cadastrar investidores
     private void cadastrarInvestidor(){
         System.out.println("\n*------------* CADASTRAR INVESTIDOR *------------*");
@@ -211,6 +213,7 @@ public class GerenciamentoInvestidores {
     public void quizPerfil(){
 
     }
+
     //exibir investidores
     private void exibirInvestidores(){
         exibirPessoaFisica();
@@ -253,6 +256,7 @@ public class GerenciamentoInvestidores {
         else if(inv instanceof Institucional){
             institucional.remove(inv);
         }
+
         carregar();
         esperar(700);
         System.out.println("Investidor excluído com sucesso!");
@@ -367,6 +371,7 @@ public class GerenciamentoInvestidores {
                 return;
         }
     }
+
     private void exibirAtivos(Investidor inv){
         inv.getCarteira().imprimirCarteira();
     }
@@ -406,7 +411,6 @@ public class GerenciamentoInvestidores {
 
     //realizar movimentação
     private void realizarMovimentacao(Investidor investidor){
-
         if(investidor == null){
             return;
         }
@@ -426,9 +430,17 @@ public class GerenciamentoInvestidores {
         try{
             if(escolha.equals("1")){
                 Ativos ativo = gerenciamentoAtivos.buscarAtivos(ticker);
+
                 if(ativo == null){
                     System.out.println("\nAtivo não encontrado.");
                     return;
+                }
+
+                if(investidor instanceof PessoaFisica){
+                    boolean verifica = verificaMovimentacao(investidor, ativo);
+                    if(!verifica){
+                        return;
+                    }
                 }
 
                 Ativos ativoCompra = ativo.clonar();
@@ -460,6 +472,36 @@ public class GerenciamentoInvestidores {
         } catch(Exception e){
             System.out.println(e.getMessage());
         }
+    }
+
+    private boolean verificaMovimentacao(Investidor investidor, Ativos ativo){
+        PessoaFisica pf = (PessoaFisica) investidor;
+        String perfil = pf.getPerfil();
+
+        if(ativo instanceof Criptoativo){
+            if(perfil.equalsIgnoreCase("Conservador")){
+                System.out.println("\nInvestidores conservadores não podem investir em criptoativos.");
+                return false;
+            }
+            if(perfil.equalsIgnoreCase("Moderado")){
+                System.out.println("\nInvestidores moderados não podem investir em criptoativos.");
+                return false;
+            }
+        }
+
+        if(ativo instanceof Stock){
+            if(perfil.equalsIgnoreCase("Conservador")){
+                System.out.println("\nInvestidores conservadores não podem investir em stocks.");
+                return false;
+            }
+        }
+
+        if(ativo.getQualificado() && pf.getPatrimonio() < 1000000){
+            System.out.println("\nApenas investidores qualificados podem movimentar este ativo.");
+            return false;
+        }
+
+        return true;
     }
 
     //selecionar investidores
