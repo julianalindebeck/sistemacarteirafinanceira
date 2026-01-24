@@ -1,6 +1,6 @@
 package ativos;
 
-public class Fii extends AtivosNacionais {
+public class Fii extends AtivosNacionais implements taxaFii {
     private String segmento;
     private double dividendo;
     private double taxaAdm;
@@ -13,7 +13,7 @@ public class Fii extends AtivosNacionais {
         rendaVariavel = true;
     }
 
-    //interface?
+    @Override
     public void exibirTaxa(){
         System.out.println(taxaAdm + "%");
     }

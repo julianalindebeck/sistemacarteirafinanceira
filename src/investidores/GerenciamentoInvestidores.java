@@ -1,8 +1,13 @@
 package investidores;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import ativos.Ativos;
 import ativos.Criptoativo;
@@ -10,6 +15,7 @@ import ativos.GerenciamentoAtivos;
 import ativos.Stock;
 import excecoes.InvalidHeritageException;
 import leituraDeArquivos.Leitor;
+import relatorio.Relatorio;
 
 public class GerenciamentoInvestidores {
     private Scanner leitura;
@@ -257,17 +263,17 @@ public class GerenciamentoInvestidores {
             institucional.remove(inv);
         }
 
-        carregar();
+        excluir();
         esperar(700);
         System.out.println("Investidor excluído com sucesso!");
     }
 
     private void excluirInvestidorPorLista(){
-        System.out.println("Digite os CPFs/CNPJs separados por vírgula:");
+        System.out.println("\nDigite os CPFs/CNPJs separados por vírgula:");
         String escolha = leitura.nextLine();
 
         if(escolha == null || escolha.isBlank()){
-            System.out.println("\nNenhum id informado.");
+            System.out.println("\nNenhum ID informado.");
             return;
         }
 
@@ -277,6 +283,8 @@ public class GerenciamentoInvestidores {
             Investidor inv = buscarInvestidor(id);
             if(inv != null){
                 excluirInvestidorSelecionado(inv);
+                excluir();
+                esperar(700);
                 System.out.println("\nInvestidor com ID " + id + " excluído com sucesso.");
             } else {
                 System.out.println("\nInvestidor com ID " + id + " não encontrado.");
@@ -365,7 +373,7 @@ public class GerenciamentoInvestidores {
                 exibirPorcentagemIntNac(inv);
                 break;
             case "6":
-                //salvarRelatorio(inv);
+                salvarRelatorio(inv);
                 break;
             case "7":
                 return;
@@ -407,6 +415,44 @@ public class GerenciamentoInvestidores {
 
         System.out.println("\nPorcentagem ativos internacionais: " + inter + "%");
         System.out.println("Porcentagem ativos nacionais: " + nac + "%");
+    }
+
+    private void salvarRelatorio(Investidor inv){
+        double valorTotalAtual = inv.getCarteira().getValorTotal();
+
+        double valorTotalGasto = 0;
+        for(Movimentacao m : inv.getHistorico()){
+            if(m.verificaCompra()){
+                valorTotalGasto += m.getQtd() * m.getPreco();
+            }
+        }
+
+        Relatorio relatorio = new Relatorio(
+            inv.getNome(),
+            inv.getId(),
+            inv.getCarteira().getAtivos(),
+            valorTotalAtual,
+            valorTotalGasto,
+            inv.getCarteira().getPorcentagemRendaFixa(),
+            inv.getCarteira().getPorcentagemRendaVar(),
+            inv.getCarteira().getPorcentagemNacional(),
+            inv.getCarteira().getPorcentagemInter()
+        );
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        String arquivo = "relatorio_" + inv.getNome() + ".json";
+
+        try(FileWriter writer = new FileWriter(arquivo)){
+            gson.toJson(relatorio, writer);
+
+            salvar();
+            esperar(700);
+            System.out.println("\nRelatório salvo com sucesso!");
+            System.out.println("Arquivo do relatório: " + arquivo);
+        } catch(IOException e){
+            System.out.println("\nErro ao salvar o relatório: " + e.getMessage());
+        }
     }
 
     //realizar movimentação
@@ -611,13 +657,22 @@ public class GerenciamentoInvestidores {
         System.out.println("");
     }
 
-    /*private void excluir(){
+    private void salvar(){
+        System.out.print("\nSalvando");
+        for(int i = 0; i < 3; i++){
+            esperar(700);
+            System.out.print(".");
+        }
+        System.out.println("");
+    }
+
+    private void excluir(){
         System.out.print("\nApagando do sistema");
         for(int i = 0; i < 3; i++){
             esperar(700);
             System.out.print(".");
         }
         System.out.println("");
-    }*/
+    }
 
 }
