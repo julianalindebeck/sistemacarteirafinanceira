@@ -210,13 +210,68 @@ public class GerenciamentoInvestidores {
             case "3":
                 p = "Conservador";
                 break;
-            //case "4":
-                // p = quizPerfil();
+            case "4":
+                p = quizPerfil();
+                break;
         }
         return p;
     }
 
-    public void quizPerfil(){
+    public String quizPerfil(){
+        carregar();
+        esperar(900);
+        System.out.println("\nDeseja descobrir o seu perfil?");
+        esperar(900);
+        System.out.println("Você está no lugar certo!");
+        esperar(900);
+        System.out.println("Responda essas 3 simples perguntas e diremos o perfil que melhor se encaixa com você!");
+        esperar(900);
+        System.out.println("\nVamos lá!");
+        esperar(900);
+
+        int m = 0, a = 0, c = 0;
+
+        do{
+            System.out.println("\n(1) Nas férias, prefere (a) ir para a praia, (b) escalar uma montanha ou (c) ficar em casa com a família?");
+            escolha = leitura.nextLine();
+        } while(!escolha.matches("[a, b, c]"));
+
+        if(escolha == "a") m++;
+        else if(escolha == "b") a++;
+        else c++;
+
+        do{
+            System.out.println("\n(2) Você vai em um restaurante 5 estrelas, prefere (a) pedir o de sempre, (b) experimentar um prato novo ou (c) pedir o prato mais exótico?");
+            escolha = leitura.nextLine();
+        } while(!escolha.matches("[a, b, c]"));
+
+        if(escolha == "a") c++;
+        else if(escolha == "b") m++;
+        else a++;
+
+        do{
+            System.out.println("\n(3) A caminho do trabalho, você escuta: (a) Chitãozinho e Xororó, (b) Guerreiras do K-Pop ou (c) Gusttavo Lima?");
+            escolha = leitura.nextLine();
+        } while(!escolha.matches("[a, b, c]"));
+
+        if(escolha == "a") m++;
+        else if(escolha == "b") a++;
+        else c++;
+
+        carregar();
+        esperar(700);
+        if(a > m && a > c){
+            System.out.println("\nSeu perfil é: Arrojado! Você gosta de aventuras, se divertir e não tem medo de arriscar um pouquinho!");
+            return "Arrojado";
+        }
+        else if(c > a && c > m){
+            System.out.println("\nSeu perfil é: Conservador! Você prefere ficar no seguro e garantido, afinal dinheiro não nasce em árvore!");
+            return "Conservador";
+        }
+        else{
+            System.out.println("\nSeu perfil é: Moderado! Você entende que tudo precisa de equilíbrio, um pouco de aventura e um pouco de segurança deixam tudo perfeito!");
+            return "Moderado";
+        }
 
     }
 
