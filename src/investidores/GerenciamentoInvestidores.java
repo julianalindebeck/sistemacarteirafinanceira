@@ -165,9 +165,7 @@ public class GerenciamentoInvestidores {
             System.out.println("\nDigite o CPF: ");
             id = leitura.nextLine();
 
-            System.out.println("\nDigite o perfil: ");
-            String perfil = leitura.nextLine();
-            //apenas perfis existentes
+            String perfil = selecionarPerfil();
 
             pessoaFisica.add(new PessoaFisica(nome, id, telefone, nascimento, endereco, patrimonio, perfil));
         }
@@ -186,6 +184,33 @@ public class GerenciamentoInvestidores {
         System.out.println("\nInvestidor cadastrado com sucesso!");
     }
 
+    private String selecionarPerfil(){
+        do{
+            System.out.println("\nSelecione seu perfil: ");
+            System.out.println("(1) Arrojado\n(2) Moderado\n(3) Conservador\n(4) Fazer um quiz");
+            escolha = leitura.nextLine();
+        } while(!escolha.matches("[1-4]"));
+
+        String p = "";
+        switch (escolha) {
+            case "1":
+                p = "Arrojado";
+                break;
+            case "2":
+                p = "Moderado";
+                break;
+            case "3":
+                p = "Conservador";
+                break;
+            //case "4":
+                // p = quizPerfil();
+        }
+        return p;
+    }
+
+    public void quizPerfil(){
+
+    }
     //exibir investidores
     private void exibirInvestidores(){
         exibirPessoaFisica();
@@ -293,7 +318,7 @@ public class GerenciamentoInvestidores {
     private void editarPessoaFisica(PessoaFisica p){
         editarDadosComuns(p);
         System.out.println("\nDigite o novo perfil: ");
-        p.setPerfil(leitura.nextLine());
+        p.setPerfil(selecionarPerfil());
 
         carregar();
         esperar(700);
