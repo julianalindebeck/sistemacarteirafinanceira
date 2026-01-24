@@ -25,13 +25,6 @@ public abstract class Investidor {
         this.endereco = endereco;
         setPatrimonio(patrimonio);
 
-        if(patrimonio >= 1000000){
-            this.qualificado = true;
-        }
-        else{
-            this.qualificado = false;
-        }
-
         this.carteira = new Carteira();
         this.historico = new ArrayList<>();
     }
@@ -41,12 +34,16 @@ public abstract class Investidor {
     }
 
     public void comprarAtivo(Ativos ativo, double quantidade){
+        if(ativo.getQualificado() && !(this.qualificado)){
+            System.out.println("\nAtivo restrito para investidores qualificados.");
+            return;
+        }
         ativo.setQtd(quantidade);
 
         double custo = ativo.getPrecoAtual() * quantidade;
 
         if(custo > patrimonio){
-            throw new IllegalArgumentException("Patrimônio insuficiente para compra.");
+            throw new IllegalArgumentException("\nPatrimônio insuficiente para compra.");
         }
 
         carteira.adicionarAtivo(ativo);
