@@ -1,6 +1,5 @@
 package investidores;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +15,6 @@ public class GerenciamentoInvestidores {
 
     private List<PessoaFisica> pessoaFisica;
     private List<Institucional> institucional;
-    private List<String> ids = new ArrayList<>();
     private GerenciamentoAtivos gerenciamentoAtivos;
 
     public GerenciamentoInvestidores(
@@ -222,16 +220,13 @@ public class GerenciamentoInvestidores {
 
     //excluir investidores
     private void excluirInvestidorSelecionado(Investidor inv){
-        atualizaIDs();
-        Carteira carteira = inv.getCarteira();
+        inv.getCarteira().excluirCarteira();
 
         if(inv instanceof PessoaFisica){
             pessoaFisica.remove(inv);
-            carteira.excluirCarteira();
         }
         else if(inv instanceof Institucional){
             institucional.remove(inv);
-            carteira.excluirCarteira();
         }
         carregar();
         esperar(700);
@@ -272,18 +267,6 @@ public class GerenciamentoInvestidores {
             }
         }
         return null;
-    }
-
-    private void atualizaIDs(){
-        ids.clear();
-
-        for(PessoaFisica p : pessoaFisica){
-            ids.add(p.getId());
-        }
-
-        for(Institucional i : institucional){
-            ids.add(i.getId());
-        }
     }
 
     //editar investidores
