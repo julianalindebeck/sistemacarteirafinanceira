@@ -236,8 +236,8 @@ public class GerenciamentoInvestidores {
             escolha = leitura.nextLine();
         } while(!escolha.matches("[a, b, c]"));
 
-        if(escolha == "a") m++;
-        else if(escolha == "b") a++;
+        if(escolha.equals("a")) m++;
+        else if(escolha.equals("b")) a++;
         else c++;
 
         do{
@@ -245,8 +245,8 @@ public class GerenciamentoInvestidores {
             escolha = leitura.nextLine();
         } while(!escolha.matches("[a, b, c]"));
 
-        if(escolha == "a") c++;
-        else if(escolha == "b") m++;
+        if(escolha.equals("a")) c++;
+        else if(escolha.equals("b")) m++;
         else a++;
 
         do{
@@ -254,8 +254,8 @@ public class GerenciamentoInvestidores {
             escolha = leitura.nextLine();
         } while(!escolha.matches("[a, b, c]"));
 
-        if(escolha == "a") m++;
-        else if(escolha == "b") a++;
+        if(escolha.equals("a")) m++;
+        else if(escolha.equals("b")) a++;
         else c++;
 
         carregar();
