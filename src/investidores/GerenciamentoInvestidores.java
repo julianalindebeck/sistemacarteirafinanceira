@@ -43,7 +43,7 @@ public class GerenciamentoInvestidores {
             System.out.println("(1) Cadastrar Investidor\n(2) Cadastrar Investidor em lote\n(3) Exibir todos Investidores\n(4) Excluir Investidores\n(5) Selecionar Investidor\n(6) Voltar ao menu principal");
 
             escolha = leitura.nextLine();
-        } while(!escolha.matches("[1-7]"));
+        } while(!escolha.matches("[1-6]"));
         
         switch(escolha){
             case "1":
@@ -66,7 +66,7 @@ public class GerenciamentoInvestidores {
                 }
                 break;
             }
-            case "7":
+            case "6":
                 return;
         }
     }
@@ -217,17 +217,17 @@ public class GerenciamentoInvestidores {
         return p;
     }
 
-    public String quizPerfil(){
+    private String quizPerfil(){
         carregar();
-        esperar(900);
+        esperar(1100);
         System.out.println("\nDeseja descobrir o seu perfil?");
-        esperar(900);
-        System.out.println("Você está no lugar certo!");
-        esperar(900);
-        System.out.println("Responda essas 3 simples perguntas e diremos o perfil que melhor se encaixa com você!");
-        esperar(900);
+        esperar(1100);
+        System.out.println("\nVocê está no lugar certo!");
+        esperar(1100);
+        System.out.println("\nResponda essas 3 simples perguntas e diremos o perfil que melhor se encaixa com você!");
+        esperar(1100);
         System.out.println("\nVamos lá!");
-        esperar(900);
+        esperar(1100);
 
         int m = 0, a = 0, c = 0;
 
@@ -320,7 +320,7 @@ public class GerenciamentoInvestidores {
 
         excluir();
         esperar(700);
-        System.out.println("Investidor excluído com sucesso!");
+        System.out.println("\nInvestidor excluído com sucesso!");
     }
 
     private void excluirInvestidorPorLista(){
